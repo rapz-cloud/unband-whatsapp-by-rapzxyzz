@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unband WhatsApp By-RapzXyz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #075e54;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #075e54;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #25d366;
+            outline: none;
+        }
+        
+        .btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: #128c7e;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #075e54;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .options {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #075e54;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .radio-option input {
+            width: auto;
+        }
+        
+        .error {
+            color: #ff0000;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .success {
+            color: #25d366;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Login -->
+    <div id="loginPage" class="container">
+        <div class="logo">WA</div>
+        <h1>Unband WhatsApp By-RapzXyz</h1>
+        
+        <div class="input-group">
+            <label for="password">Masukkan Sandi:</label>
+            <input type="password" id="password" placeholder="Ketik sandi di sini">
+        </div>
+        
+        <button id="loginBtn" class="btn">Masuk</button>
+        <button id="joinGroupBtn" class="btn btn-secondary">Mau tau sandi nya? join grub ku sini</button>
+        
+        <div id="errorMsg" class="error">Sandi salah! Coba lagi.</div>
+    </div>
+    
+    <!-- Halaman Utama -->
+    <div id="mainPage" class="container" style="display: none;">
+        <div class="logo">WA</div>
+        <h1>Unband WhatsApp By-RapzXyz</h1>
+        
+        <div class="options">
+            <div class="option-group">
+                <div class="option-title">Sebut kan opsi kenon wa mu:</div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="option" value="permanen">
+                        1. Permanen
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="option" value="spam">
+                        2. Spam
+                    </label>
+                </div>
+            </div>
+            
+            <button id="sendEmailBtn" class="btn">Kirim Permohonan</button>
+            <div id="successMsg" class="success">Permohonan berhasil dikirim!</div>
+        </div>
+    </div>
+
+    <script>
+        // Elemen DOM
+        const loginPage = document.getElementById('loginPage');
+        const mainPage = document.getElementById('mainPage');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const joinGroupBtn = document.getElementById('joinGroupBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+        const successMsg = document.getElementById('successMsg');
+        const options = document.querySelector('.options');
+        
+        // Sandi yang benar
+        const correctPassword = "RapzXyz-Novalia";
+        
+        // Teks email untuk masing-masing opsi
+        const emailTexts = {
+            permanen: "Привет, продвинутый мета-ай, WhatsApp / для справочного центра мета-ай, с уважением. Я хочу подать апелляцию на блокировку моей учетной записи. [+62no lu@meta.whatsapp.com] Номер заблокирован с 2018 года, но я хочу использовать WhatsApp для связи. Я прочитал статью/службу конфиденциальности, поддерживаемую службой поддержки WhatsApp [https://faq.whatsapp.com/general/23154266]. Поэтому я попросил WhatsApp восстановить мою юридически заблокированную учетную запись, поскольку я не нарушал правила WhatsApp и соблюдал их. Надеюсь, вы поняли, что я сказал. Надеюсь, вы обработаете мое сообщение. Спасибо. С уважением, [спасибо]",
+            spam: "Akun whatsapp saya secara tiba-tiba diblokir karena spam, walaupun saya telah mematuhi ketentuan layanan di whatsapp, mohon tinjau akun saya dan segera selesaikan masalah ini, Terima kasih. Ini nomor saya : [+62 xxnomor lu]"
+        };
+        
+        // Event listener untuk tombol login
+        loginBtn.addEventListener('click', function() {
+            const enteredPassword = passwordInput.value;
+            
+            if (enteredPassword === correctPassword) {
+                // Password benar, pindah ke halaman utama
+                loginPage.style.display = 'none';
+                mainPage.style.display = 'block';
+                options.style.display = 'block';
+            } else {
+                // Password salah, tampilkan pesan error
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
+            }
+        });
+        
+        // Event listener untuk tombol join group
+        joinGroupBtn.addEventListener('click', function() {
+            window.open('https://chat.whatsapp.com/KjG7J6cDMW2KLCtYx0sLKP?mode=wwc', '_blank');
+        });
+        
+        // Event listener untuk tombol kirim email
+        sendEmailBtn.addEventListener('click', function() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            
+            if (!selectedOption) {
+                alert('Pilih opsi terlebih dahulu!');
+                return;
+            }
+            
+            const optionValue = selectedOption.value;
+            const emailText = emailTexts[optionValue];
+            const emailAddress = "support@support.whatsapp.com";
+            const subject = "Permohonan Unband WhatsApp";
+            
+            // Membuka aplikasi email default dengan teks yang sudah disiapkan
+            const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailText)}`;
+            window.location.href = mailtoLink;
+            
+            // Tampilkan pesan sukses
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        });
+        
+        // Event listener untuk tombol enter di input password
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
