@@ -18,13 +18,16 @@
             --primary-dark: #128c7e;
             --secondary: #075e54;
             --accent: #00a8ff;
+            --accent-purple: #9c27b0;
+            --accent-orange: #ff9800;
+            --accent-pink: #e91e63;
             --glass: rgba(255, 255, 255, 0.15);
             --glass-border: rgba(255, 255, 255, 0.2);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, #0f1b3a, #1a2a6c, #2c1a4d);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -34,15 +37,68 @@
             overflow-x: hidden;
         }
         
-        body::before {
-            content: '';
+        /* Background dengan bintang */
+        .stars {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            z-index: -2;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 5s) infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        /* Planet */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
             z-index: -1;
+        }
+        
+        .planet-1 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #ff9800, #e65100);
+            top: 10%;
+            right: 10%;
+            box-shadow: 0 0 40px rgba(255, 152, 0, 0.5);
+            animation: float 25s infinite linear;
+        }
+        
+        .planet-2 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #9c27b0, #4a148c);
+            bottom: 15%;
+            left: 8%;
+            box-shadow: 0 0 30px rgba(156, 39, 176, 0.5);
+            animation: float 20s infinite linear reverse;
+        }
+        
+        .planet-3 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #00bcd4, #006064);
+            top: 60%;
+            right: 20%;
+            box-shadow: 0 0 25px rgba(0, 188, 212, 0.5);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
         }
         
         .container {
@@ -57,6 +113,19 @@
             text-align: center;
             color: white;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
         }
         
         .container:hover {
@@ -70,13 +139,17 @@
             font-size: 26px;
             font-weight: 600;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .logo {
             width: 90px;
             height: 90px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--accent-purple));
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -178,6 +251,14 @@
         
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-purple {
+            background: linear-gradient(135deg, var(--accent-purple), #6a1b9a);
+        }
+        
+        .btn-orange {
+            background: linear-gradient(135deg, var(--accent-orange), #e65100);
         }
         
         .options {
@@ -415,6 +496,117 @@
             padding-left: 25px;
         }
         
+        /* Fitur Baru: Statistik */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Progress Bar */
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Notifikasi */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .notification-error {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        /* Fitur Baru: Dark Mode Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 25px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle.active::before {
+            transform: translateX(25px);
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -439,11 +631,47 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+        
+        /* Responsif */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Background Bintang -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Planet -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+    <div class="planet planet-3"></div>
+    
+    <!-- Notifikasi -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle" style="color: #25d366;"></i>
+        <span id="notification-text">Pesan notifikasi</span>
+    </div>
+    
     <!-- Halaman Login -->
     <div id="loginPage" class="container">
+        <div class="theme-toggle" id="themeToggle"></div>
+        
         <div class="logo floating">
             <i class="fab fa-whatsapp"></i>
         </div>
@@ -496,10 +724,33 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Fitur Baru: Statistik -->
+        <div class="feature-section">
+            <div class="feature-title">
+                <i class="fas fa-chart-bar"></i> Statistik Layanan
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Tingkat Keberhasilan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1.2K</div>
+                    <div class="stat-label">Pengguna Terbantu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Layanan Aktif</div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Halaman Utama -->
     <div id="mainPage" class="container" style="display: none;">
+        <div class="theme-toggle" id="themeToggle2"></div>
+        
         <div class="logo">
             <i class="fab fa-whatsapp"></i>
         </div>
@@ -509,6 +760,7 @@
             <div class="tab active" data-tab="unband">Unband</div>
             <div class="tab" data-tab="history">Riwayat</div>
             <div class="tab" data-tab="faq">Bantuan</div>
+            <div class="tab" data-tab="tools">Tools</div>
         </div>
         
         <!-- Tab Unband -->
@@ -527,6 +779,17 @@
                             <input type="radio" name="option" value="spam">
                             2. Spam
                         </label>
+                    </div>
+                </div>
+                
+                <!-- Fitur Baru: Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Mulai</span>
+                        <span>Selesai</span>
                     </div>
                 </div>
                 
@@ -573,6 +836,11 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Fitur Baru: Tombol Ekspor Riwayat -->
+            <button id="exportHistoryBtn" class="btn btn-purple" style="margin-top: 15px;">
+                <i class="fas fa-download"></i> Ekspor Riwayat
+            </button>
         </div>
         
         <!-- Tab Bantuan -->
@@ -619,6 +887,64 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Tab Tools Baru -->
+        <div id="tools-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-tools"></i> Alat Bantu Tambahan
+            </div>
+            
+            <div class="feature-grid" style="margin-bottom: 20px;">
+                <div class="feature-item" id="backupBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <div class="feature-text">Backup Data</div>
+                </div>
+                <div class="feature-item" id="restoreBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="feature-text">Restore Data</div>
+                </div>
+                <div class="feature-item" id="checkStatusBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="feature-text">Cek Status</div>
+                </div>
+                <div class="feature-item" id="clearCacheBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="feature-text">Bersihkan Cache</div>
+                </div>
+            </div>
+            
+            <div class="option-group">
+                <div class="option-title">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="checkbox" id="autoSave">
+                        Simpan otomatis
+                    </label>
+                    <label class="radio-option">
+                        <input type="checkbox" id="notifications" checked>
+                        Notifikasi
+                    </label>
+                    <label class="radio-option">
+                        <input type="checkbox" id="darkMode">
+                        Mode Gelap
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-orange" style="margin-top: 15px;">
+                <i class="fas fa-sync"></i> Perbarui Aplikasi
+            </button>
+        </div>
     </div>
 
     <script>
@@ -634,6 +960,15 @@
         const options = document.querySelector('.options');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const progressFill = document.getElementById('progressFill');
+        const themeToggles = document.querySelectorAll('.theme-toggle');
+        const exportHistoryBtn = document.getElementById('exportHistoryBtn');
+        const backupBtn = document.getElementById('backupBtn');
+        const restoreBtn = document.getElementById('restoreBtn');
+        const checkStatusBtn = document.getElementById('checkStatusBtn');
+        const clearCacheBtn = document.getElementById('clearCacheBtn');
         
         // Sandi yang benar
         const correctPassword = "RapzXyz-Novalia";
@@ -644,6 +979,53 @@
             spam: "Akun whatsapp saya secara tiba-tiba diblokir karena spam, walaupun saya telah mematuhi ketentuan layanan di whatsapp, mohon tinjau akun saya dan segera selesaikan masalah ini, Terima kasih. Ini nomor saya : [+62 xxnomor lu]"
         };
         
+        // Fungsi untuk membuat bintang
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Ukuran acak
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posisi acak
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Durasi animasi acak
+                star.style.setProperty('--duration', `${5 + Math.random() * 10}s`);
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'success') {
+            notificationText.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('show');
+            
+            if (type === 'success') {
+                notification.classList.add('notification-success');
+            } else {
+                notification.classList.add('notification-error');
+            }
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Fungsi untuk memperbarui progress bar
+        function updateProgress(percent) {
+            progressFill.style.width = `${percent}%`;
+        }
+        
         // Event listener untuk tombol login
         loginBtn.addEventListener('click', function() {
             const enteredPassword = passwordInput.value;
@@ -653,9 +1035,11 @@
                 loginPage.style.display = 'none';
                 mainPage.style.display = 'block';
                 options.style.display = 'block';
+                showNotification('Login berhasil!', 'success');
             } else {
                 // Password salah, tampilkan pesan error
                 errorMsg.style.display = 'block';
+                showNotification('Sandi salah! Coba lagi.', 'error');
                 setTimeout(() => {
                     errorMsg.style.display = 'none';
                 }, 3000);
@@ -672,13 +1056,14 @@
             const selectedOption = document.querySelector('input[name="option"]:checked');
             
             if (!selectedOption) {
-                alert('Pilih opsi terlebih dahulu!');
+                showNotification('Pilih opsi terlebih dahulu!', 'error');
                 return;
             }
             
             // Update status indicator
             const statusSteps = document.querySelectorAll('.status-step');
             statusSteps[1].classList.add('active');
+            updateProgress(50);
             
             // Simulasi loading
             sendEmailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
@@ -696,6 +1081,7 @@
                 
                 // Update status indicator
                 statusSteps[2].classList.add('active');
+                updateProgress(100);
                 
                 // Reset tombol
                 sendEmailBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Permohonan';
@@ -703,6 +1089,7 @@
                 
                 // Tampilkan pesan sukses
                 successMsg.style.display = 'block';
+                showNotification('Permohonan berhasil dikirim!', 'success');
                 setTimeout(() => {
                     successMsg.style.display = 'none';
                 }, 5000);
@@ -732,11 +1119,50 @@
             }
         });
         
+        // Event listener untuk toggle tema
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                document.body.classList.toggle('dark-mode');
+                showNotification('Tema diubah!', 'success');
+            });
+        });
+        
+        // Event listener untuk tombol ekspor riwayat
+        exportHistoryBtn.addEventListener('click', function() {
+            showNotification('Mengekspor riwayat...', 'success');
+            // Simulasi ekspor
+            setTimeout(() => {
+                showNotification('Riwayat berhasil diekspor!', 'success');
+            }, 1500);
+        });
+        
+        // Event listener untuk tombol tools
+        backupBtn.addEventListener('click', function() {
+            showNotification('Memulai backup data...', 'success');
+        });
+        
+        restoreBtn.addEventListener('click', function() {
+            showNotification('Memulihkan data...', 'success');
+        });
+        
+        checkStatusBtn.addEventListener('click', function() {
+            showNotification('Memeriksa status...', 'success');
+        });
+        
+        clearCacheBtn.addEventListener('click', function() {
+            showNotification('Membersihkan cache...', 'success');
+        });
+        
         // Animasi untuk elemen fitur
         const featureItems = document.querySelectorAll('.feature-item');
         featureItems.forEach((item, index) => {
             item.style.animationDelay = `${index * 0.1}s`;
         });
+        
+        // Inisialisasi
+        createStars();
+        updateProgress(0);
     </script>
 </body>
 </html>
