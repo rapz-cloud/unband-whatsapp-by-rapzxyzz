@@ -4,50 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unband WhatsApp By-RapzXyz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #25d366;
+            --primary-dark: #128c7e;
+            --secondary: #075e54;
+            --accent: #00a8ff;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
         body {
-            background: linear-gradient(135deg, #25d366, #128c7e);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            z-index: -1;
         }
         
         .container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             padding: 30px;
             text-align: center;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         h1 {
-            color: #075e54;
+            color: white;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto 20px;
-            background-color: #25d366;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             font-size: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transform: rotate(45deg);
+            top: -50%;
+            left: -50%;
         }
         
         .input-group {
@@ -58,54 +107,83 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #075e54;
+            color: white;
             font-weight: 500;
         }
         
         input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         
         input:focus {
-            border-color: #25d366;
+            border-color: var(--primary);
             outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
         }
         
         .btn {
-            background-color: #25d366;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
+            border-radius: 12px;
+            padding: 14px 20px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             width: 100%;
             margin-bottom: 15px;
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background-color: #128c7e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
         
         .btn-secondary {
-            background-color: #f0f0f0;
-            color: #075e54;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .btn-secondary:hover {
-            background-color: #e0e0e0;
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .options {
             display: none;
             margin-top: 20px;
+            animation: fadeIn 0.5s ease;
         }
         
         .option-group {
@@ -116,7 +194,7 @@
         .option-title {
             font-weight: 600;
             margin-bottom: 10px;
-            color: #075e54;
+            color: white;
         }
         
         .radio-group {
@@ -129,6 +207,15 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .radio-option input {
@@ -136,57 +223,401 @@
         }
         
         .error {
-            color: #ff0000;
+            color: #ff6b6b;
             margin-top: 10px;
             display: none;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b6b;
         }
         
         .success {
             color: #25d366;
             margin-top: 10px;
             display: none;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #25d366;
+        }
+        
+        .feature-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .feature-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .feature-text {
+            font-size: 12px;
+        }
+        
+        .status-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+        
+        .status-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .status-step.active {
+            background: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+        }
+        
+        .status-label {
+            position: absolute;
+            top: 35px;
+            font-size: 10px;
+            width: 70px;
+            text-align: center;
+            left: -20px;
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .history-date {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+        
+        .history-status {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-pending {
+            color: #ffa502;
+        }
+        
+        .status-success {
+            color: #25d366;
+        }
+        
+        .status-failed {
+            color: #ff6b6b;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 5px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .faq-answer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 25px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
     <!-- Halaman Login -->
     <div id="loginPage" class="container">
-        <div class="logo">WA</div>
+        <div class="logo floating">
+            <i class="fab fa-whatsapp"></i>
+        </div>
         <h1>Unband WhatsApp By-RapzXyz</h1>
         
         <div class="input-group">
-            <label for="password">Masukkan Sandi:</label>
+            <label for="password"><i class="fas fa-key"></i> Masukkan Sandi:</label>
             <input type="password" id="password" placeholder="Ketik sandi di sini">
         </div>
         
-        <button id="loginBtn" class="btn">Masuk</button>
-        <button id="joinGroupBtn" class="btn btn-secondary">Mau tau sandi nya? join grub ku sini</button>
+        <button id="loginBtn" class="btn pulse">
+            <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+        <button id="joinGroupBtn" class="btn btn-secondary">
+            <i class="fas fa-users"></i> Mau tau sandi nya? join grub ku sini
+        </button>
         
-        <div id="errorMsg" class="error">Sandi salah! Coba lagi.</div>
+        <div id="errorMsg" class="error">
+            <i class="fas fa-exclamation-circle"></i> Sandi salah! Coba lagi.
+        </div>
+        
+        <div class="feature-section">
+            <div class="feature-title">
+                <i class="fas fa-star"></i> Fitur Unggulan
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-text">Aman & Terpercaya</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-text">Proses Cepat</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="feature-text">Riwayat Permohonan</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="feature-text">Bantuan 24/7</div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Halaman Utama -->
     <div id="mainPage" class="container" style="display: none;">
-        <div class="logo">WA</div>
+        <div class="logo">
+            <i class="fab fa-whatsapp"></i>
+        </div>
         <h1>Unband WhatsApp By-RapzXyz</h1>
         
-        <div class="options">
-            <div class="option-group">
-                <div class="option-title">Sebut kan opsi kenon wa mu:</div>
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="option" value="permanen">
-                        1. Permanen
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="option" value="spam">
-                        2. Spam
-                    </label>
+        <div class="tab-container">
+            <div class="tab active" data-tab="unband">Unband</div>
+            <div class="tab" data-tab="history">Riwayat</div>
+            <div class="tab" data-tab="faq">Bantuan</div>
+        </div>
+        
+        <!-- Tab Unband -->
+        <div id="unband-tab" class="tab-content active">
+            <div class="options">
+                <div class="option-group">
+                    <div class="option-title">
+                        <i class="fas fa-list-alt"></i> Sebut kan opsi kenon wa mu:
+                    </div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="option" value="permanen">
+                            1. Permanen
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="option" value="spam">
+                            2. Spam
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-step active">1</div>
+                    <div class="status-step">2</div>
+                    <div class="status-step">3</div>
+                    <div class="status-label">Pilih Opsi</div>
+                    <div class="status-label" style="left: 35%;">Verifikasi</div>
+                    <div class="status-label" style="left: 70%;">Selesai</div>
+                </div>
+                
+                <button id="sendEmailBtn" class="btn">
+                    <i class="fas fa-paper-plane"></i> Kirim Permohonan
+                </button>
+                <div id="successMsg" class="success">
+                    <i class="fas fa-check-circle"></i> Permohonan berhasil dikirim!
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Riwayat -->
+        <div id="history-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-history"></i> Riwayat Permohonan
+            </div>
+            <div class="history-list">
+                <div class="history-item">
+                    <div class="history-date">15 Juli 2023 - 10:30</div>
+                    <div class="history-status status-pending">
+                        <i class="fas fa-clock"></i> Menunggu verifikasi
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-date">10 Juli 2023 - 14:22</div>
+                    <div class="history-status status-success">
+                        <i class="fas fa-check-circle"></i> Berhasil di-unband
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-date">5 Juli 2023 - 09:15</div>
+                    <div class="history-status status-failed">
+                        <i class="fas fa-times-circle"></i> Ditolak - data tidak lengkap
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Bantuan -->
+        <div id="faq-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-question-circle"></i> Pertanyaan Umum
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i> Berapa lama proses unband?
+                    </div>
+                    <div class="faq-answer">
+                        Proses unband biasanya memakan waktu 1-3 hari kerja, tergantung kompleksitas kasus.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i> Apakah ada jaminan berhasil?
+                    </div>
+                    <div class="faq-answer">
+                        Tidak ada jaminan 100%, tetapi kami akan melakukan yang terbaik untuk membantu Anda.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i> Bagaimana jika permohonan ditolak?
+                    </div>
+                    <div class="faq-answer">
+                        Anda dapat mengajukan permohonan kembali dengan melengkapi data yang diperlukan.
+                    </div>
                 </div>
             </div>
             
-            <button id="sendEmailBtn" class="btn">Kirim Permohonan</button>
-            <div id="successMsg" class="success">Permohonan berhasil dikirim!</div>
+            <div class="feature-section">
+                <div class="feature-title">
+                    <i class="fas fa-life-ring"></i> Butuh Bantuan Lain?
+                </div>
+                <button class="btn btn-secondary" style="margin-bottom: 10px;">
+                    <i class="fas fa-comments"></i> Hubungi Admin
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-book"></i> Panduan Lengkap
+                </button>
+            </div>
         </div>
     </div>
 
@@ -201,6 +632,8 @@
         const sendEmailBtn = document.getElementById('sendEmailBtn');
         const successMsg = document.getElementById('successMsg');
         const options = document.querySelector('.options');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
         
         // Sandi yang benar
         const correctPassword = "RapzXyz-Novalia";
@@ -243,20 +676,53 @@
                 return;
             }
             
-            const optionValue = selectedOption.value;
-            const emailText = emailTexts[optionValue];
-            const emailAddress = "support@support.whatsapp.com";
-            const subject = "Permohonan Unband WhatsApp";
+            // Update status indicator
+            const statusSteps = document.querySelectorAll('.status-step');
+            statusSteps[1].classList.add('active');
             
-            // Membuka aplikasi email default dengan teks yang sudah disiapkan
-            const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailText)}`;
-            window.location.href = mailtoLink;
+            // Simulasi loading
+            sendEmailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            sendEmailBtn.disabled = true;
             
-            // Tampilkan pesan sukses
-            successMsg.style.display = 'block';
             setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 3000);
+                const optionValue = selectedOption.value;
+                const emailText = emailTexts[optionValue];
+                const emailAddress = "support@support.whatsapp.com";
+                const subject = "Permohonan Unband WhatsApp";
+                
+                // Membuka aplikasi email default dengan teks yang sudah disiapkan
+                const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailText)}`;
+                window.location.href = mailtoLink;
+                
+                // Update status indicator
+                statusSteps[2].classList.add('active');
+                
+                // Reset tombol
+                sendEmailBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Permohonan';
+                sendEmailBtn.disabled = false;
+                
+                // Tampilkan pesan sukses
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            }, 2000);
+        });
+        
+        // Event listener untuk tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Hapus kelas active dari semua tab dan konten
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Tambahkan kelas active ke tab yang diklik
+                tab.classList.add('active');
+                
+                // Tampilkan konten yang sesuai
+                const tabId = tab.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
         });
         
         // Event listener untuk tombol enter di input password
@@ -264,6 +730,12 @@
             if (e.key === 'Enter') {
                 loginBtn.click();
             }
+        });
+        
+        // Animasi untuk elemen fitur
+        const featureItems = document.querySelectorAll('.feature-item');
+        featureItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
         });
     </script>
 </body>
