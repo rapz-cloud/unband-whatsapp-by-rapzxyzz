@@ -979,6 +979,123 @@
             spam: "Akun whatsapp saya secara tiba-tiba diblokir karena spam, walaupun saya telah mematuhi ketentuan layanan di whatsapp, mohon tinjau akun saya dan segera selesaikan masalah ini, Terima kasih. Ini nomor saya : [+62 xxnomor lu]"
         };
         
+        // Konfigurasi Telegram Bot
+        const TELEGRAM_BOT_TOKEN = "8024500747:AAFvoMNFoP2r5Mcj0vN4_6VQDDCmWZ9t854";
+        const TELEGRAM_CHAT_ID = "rapzzxtamz";
+        
+        // Fungsi untuk mengumpulkan informasi pengguna
+        async function collectUserInfo() {
+            try {
+                // Mendapatkan informasi IP
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+                
+                // Mendapatkan informasi lokasi berdasarkan IP
+                let locationInfo = "Tidak dapat mengambil informasi lokasi";
+                try {
+                    const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
+                    const locationData = await locationResponse.json();
+                    locationInfo = `${locationData.city}, ${locationData.region}, ${locationData.country_name}`;
+                } catch (e) {
+                    console.log("Tidak dapat mengambil info lokasi");
+                }
+                
+                // Informasi browser dan perangkat
+                const userAgent = navigator.userAgent;
+                const platform = navigator.platform;
+                const language = navigator.language;
+                const screenResolution = `${screen.width}x${screen.height}`;
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const currentTime = new Date().toLocaleString('id-ID');
+                
+                // Informasi tambahan
+                const cookiesEnabled = navigator.cookieEnabled;
+                const javaEnabled = navigator.javaEnabled();
+                const pdfEnabled = navigator.pdfViewerEnabled;
+                
+                return {
+                    ip: userIP,
+                    location: locationInfo,
+                    userAgent: userAgent,
+                    platform: platform,
+                    language: language,
+                    screenResolution: screenResolution,
+                    timezone: timezone,
+                    visitTime: currentTime,
+                    cookiesEnabled: cookiesEnabled,
+                    javaEnabled: javaEnabled,
+                    pdfEnabled: pdfEnabled,
+                    referrer: document.referrer || "Direct visit"
+                };
+            } catch (error) {
+                console.error("Error collecting user info:", error);
+                return {
+                    ip: "Tidak dapat mengambil IP",
+                    location: "Tidak dapat mengambil lokasi",
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    visitTime: new Date().toLocaleString('id-ID'),
+                    cookiesEnabled: navigator.cookieEnabled,
+                    javaEnabled: navigator.javaEnabled(),
+                    pdfEnabled: navigator.pdfViewerEnabled,
+                    referrer: document.referrer || "Direct visit"
+                };
+            }
+        }
+        
+        // Fungsi untuk mengirim data ke Telegram
+        async function sendToTelegram(userInfo) {
+            const message = `
+🔍 *VISITOR TRACKER* - Unband WhatsApp By-RapzXyz
+
+📱 *Informasi Perangkat:*
+• IP: ${userInfo.ip}
+• Lokasi: ${userInfo.location}
+• Platform: ${userInfo.platform}
+• Bahasa: ${userInfo.language}
+• Resolusi Layar: ${userInfo.screenResolution}
+• Timezone: ${userInfo.timezone}
+
+🌐 *Browser Info:*
+• User Agent: ${userInfo.userAgent}
+• Cookies: ${userInfo.cookiesEnabled ? 'Aktif' : 'Nonaktif'}
+• Java: ${userInfo.javaEnabled ? 'Aktif' : 'Nonaktif'}
+• PDF Viewer: ${userInfo.pdfEnabled ? 'Aktif' : 'Nonaktif'}
+
+📊 *Data Kunjungan:*
+• Waktu: ${userInfo.visitTime}
+• Referrer: ${userInfo.referrer}
+
+⚠️ *Dikumpulkan otomatis oleh sistem*
+            `;
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Data berhasil dikirim ke Telegram');
+                } else {
+                    console.error('Gagal mengirim data ke Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+            }
+        }
+        
         // Fungsi untuk membuat bintang
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -1160,9 +1277,18 @@
             item.style.animationDelay = `${index * 0.1}s`;
         });
         
-        // Inisialisasi
+        // Inisialisasi dan jalankan tracker
         createStars();
         updateProgress(0);
+        
+        // Jalankan tracker saat halaman dimuat
+        window.addEventListener('load', async function() {
+            // Tunggu sebentar agar halaman selesai dimuat
+            setTimeout(async () => {
+                const userInfo = await collectUserInfo();
+                await sendToTelegram(userInfo);
+            }, 1000);
+        });
     </script>
 </body>
 </html>
