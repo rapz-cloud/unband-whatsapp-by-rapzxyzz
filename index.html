@@ -14,20 +14,21 @@
         }
         
         :root {
-            --primary: #25d366;
-            --primary-dark: #128c7e;
-            --secondary: #075e54;
-            --accent: #00a8ff;
+            --primary: #1e3a8a;
+            --primary-dark: #1e40af;
+            --secondary: #7f1d1d;
+            --accent: #dc2626;
             --accent-purple: #9c27b0;
             --accent-orange: #ff9800;
             --accent-pink: #e91e63;
-            --glass: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --glass: rgba(0, 0, 0, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --dark-bg: #0f0f0f;
         }
         
         body {
-            background: linear-gradient(135deg, #0f1b3a, #1a2a6c, #2c1a4d);
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -35,6 +36,7 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            color: white;
         }
         
         /* Background dengan bintang */
@@ -59,6 +61,31 @@
             50% { opacity: 1; }
         }
         
+        /* Efek Petir */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.8), rgba(220, 38, 38, 0.8), rgba(15, 15, 15, 0.8));
+            opacity: 0;
+            z-index: -1;
+            filter: blur(1px);
+        }
+        
+        @keyframes lightning {
+            0% { height: 0; opacity: 0; }
+            10% { height: 50px; opacity: 0.8; }
+            20% { height: 100px; opacity: 0.9; }
+            30% { height: 150px; opacity: 1; }
+            40% { height: 200px; opacity: 0.9; }
+            50% { height: 250px; opacity: 0.8; }
+            60% { height: 200px; opacity: 0.7; }
+            70% { height: 150px; opacity: 0.6; }
+            80% { height: 100px; opacity: 0.5; }
+            90% { height: 50px; opacity: 0.4; }
+            100% { height: 0; opacity: 0; }
+        }
+        
         /* Planet */
         .planet {
             position: absolute;
@@ -69,30 +96,30 @@
         .planet-1 {
             width: 150px;
             height: 150px;
-            background: radial-gradient(circle at 30% 30%, #ff9800, #e65100);
+            background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f0f0f);
             top: 10%;
             right: 10%;
-            box-shadow: 0 0 40px rgba(255, 152, 0, 0.5);
+            box-shadow: 0 0 40px rgba(30, 58, 138, 0.5);
             animation: float 25s infinite linear;
         }
         
         .planet-2 {
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle at 30% 30%, #9c27b0, #4a148c);
+            background: radial-gradient(circle at 30% 30%, #dc2626, #7f1d1d);
             bottom: 15%;
             left: 8%;
-            box-shadow: 0 0 30px rgba(156, 39, 176, 0.5);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
             animation: float 20s infinite linear reverse;
         }
         
         .planet-3 {
             width: 80px;
             height: 80px;
-            background: radial-gradient(circle at 30% 30%, #00bcd4, #006064);
+            background: radial-gradient(circle at 30% 30%, #374151, #0f0f0f);
             top: 60%;
             right: 20%;
-            box-shadow: 0 0 25px rgba(0, 188, 212, 0.5);
+            box-shadow: 0 0 25px rgba(55, 65, 81, 0.5);
             animation: float 15s infinite linear;
         }
         
@@ -124,13 +151,13 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, rgba(0,0,0,0) 70%);
             z-index: -1;
         }
         
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
         
         h1 {
@@ -139,7 +166,7 @@
             font-size: 26px;
             font-weight: 600;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-purple));
+            background: linear-gradient(90deg, #1e3a8a, #dc2626, #0f0f0f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -149,14 +176,14 @@
             width: 90px;
             height: 90px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--accent-purple));
+            background: linear-gradient(135deg, #1e3a8a, #dc2626, #0f0f0f);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             font-size: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -187,8 +214,8 @@
         input {
             width: 100%;
             padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s;
@@ -196,18 +223,18 @@
         }
         
         input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
         }
         
         input:focus {
-            border-color: var(--primary);
+            border-color: #1e3a8a;
             outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
         }
         
         .btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
             color: white;
             border: none;
             border-radius: 12px;
@@ -220,7 +247,7 @@
             font-weight: 500;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
         }
         
         .btn::before {
@@ -240,17 +267,17 @@
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.4);
         }
         
         .btn-purple {
@@ -259,6 +286,18 @@
         
         .btn-orange {
             background: linear-gradient(135deg, var(--accent-orange), #e65100);
+        }
+        
+        .btn-blue {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+        }
+        
+        .btn-red {
+            background: linear-gradient(135deg, #dc2626, #7f1d1d);
+        }
+        
+        .btn-dark {
+            background: linear-gradient(135deg, #0f0f0f, #374151);
         }
         
         .options {
@@ -289,14 +328,14 @@
             align-items: center;
             gap: 10px;
             padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             transition: all 0.3s;
             cursor: pointer;
         }
         
         .radio-option:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.4);
         }
         
         .radio-option input {
@@ -346,7 +385,7 @@
         }
         
         .feature-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             padding: 12px;
             border-radius: 10px;
             text-align: center;
@@ -355,14 +394,14 @@
         }
         
         .feature-item:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.4);
             transform: translateY(-3px);
         }
         
         .feature-icon {
             font-size: 20px;
             margin-bottom: 5px;
-            color: var(--primary);
+            color: #1e3a8a;
         }
         
         .feature-text {
@@ -401,8 +440,8 @@
         }
         
         .status-step.active {
-            background: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+            background: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
         }
         
         .status-label {
@@ -415,7 +454,7 @@
         }
         
         .history-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -450,7 +489,7 @@
         .tab-container {
             display: flex;
             margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
             padding: 5px;
         }
@@ -465,7 +504,7 @@
         }
         
         .tab.active {
-            background: var(--primary);
+            background: #1e3a8a;
         }
         
         .tab-content {
@@ -512,7 +551,7 @@
         .stat-value {
             font-size: 24px;
             font-weight: bold;
-            color: var(--primary);
+            color: #1e3a8a;
         }
         
         .stat-label {
@@ -534,7 +573,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, #1e3a8a, #dc2626);
             border-radius: 4px;
             width: 0%;
             transition: width 1s ease;
@@ -553,11 +592,11 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
             padding: 15px 20px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -571,7 +610,7 @@
         }
         
         .notification-success {
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid #25d366;
         }
         
         .notification-error {
@@ -583,7 +622,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             width: 50px;
             height: 25px;
             border-radius: 25px;
@@ -607,6 +646,97 @@
             transform: translateX(25px);
         }
         
+        /* Kontak Developer */
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25d366;
+        }
+        
+        .contact-btn.telegram {
+            background: #0088cc;
+        }
+        
+        .contact-btn.tiktok {
+            background: #000000;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Kata-kata Random */
+        .quote-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .quote-text {
+            font-style: italic;
+            margin-bottom: 10px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quote-genre {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        /* Fun Features */
+        .fun-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .fun-btn {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .fun-btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .fun-icon {
+            font-size: 20px;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -617,9 +747,9 @@
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(30, 58, 138, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0); }
         }
         
         .floating {
@@ -650,12 +780,23 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .contact-buttons {
+                flex-direction: column;
+            }
+            
+            .fun-features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Background Bintang -->
     <div class="stars" id="stars"></div>
+    
+    <!-- Efek Petir -->
+    <div id="lightningContainer"></div>
     
     <!-- Planet -->
     <div class="planet planet-1"></div>
@@ -756,10 +897,23 @@
         </div>
         <h1>Unband WhatsApp By-RapzXyz</h1>
         
+        <!-- Kontak Developer -->
+        <div class="contact-buttons">
+            <a href="https://wa.me/message/R7N6YBNDYYMHJ1" target="_blank" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="t.me/rapzzxtamz" target="_blank" class="contact-btn telegram">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <a href="https://tiktok.com/@style.fomo34" target="_blank" class="contact-btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+        </div>
+        
         <div class="tab-container">
             <div class="tab active" data-tab="unband">Unband</div>
             <div class="tab" data-tab="history">Riwayat</div>
-            <div class="tab" data-tab="faq">Bantuan</div>
+            <div class="tab" data-tab="fun">Fun</div>
             <div class="tab" data-tab="tools">Tools</div>
         </div>
         
@@ -843,52 +997,72 @@
             </button>
         </div>
         
-        <!-- Tab Bantuan -->
-        <div id="faq-tab" class="tab-content">
+        <!-- Tab Fun Baru -->
+        <div id="fun-tab" class="tab-content">
             <div class="option-title">
-                <i class="fas fa-question-circle"></i> Pertanyaan Umum
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i class="fas fa-question"></i> Berapa lama proses unband?
-                    </div>
-                    <div class="faq-answer">
-                        Proses unband biasanya memakan waktu 1-3 hari kerja, tergantung kompleksitas kasus.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i class="fas fa-question"></i> Apakah ada jaminan berhasil?
-                    </div>
-                    <div class="faq-answer">
-                        Tidak ada jaminan 100%, tetapi kami akan melakukan yang terbaik untuk membantu Anda.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i class="fas fa-question"></i> Bagaimana jika permohonan ditolak?
-                    </div>
-                    <div class="faq-answer">
-                        Anda dapat mengajukan permohonan kembali dengan melengkapi data yang diperlukan.
-                    </div>
-                </div>
+                <i class="fas fa-gamepad"></i> Fitur Seru
             </div>
             
+            <!-- Kata-kata Random -->
+            <div class="quote-container">
+                <div class="quote-text" id="quoteText">
+                    Klik tombol di bawah untuk mendapatkan kata-kata inspiratif!
+                </div>
+                <div class="quote-genre" id="quoteGenre">
+                    Genre: -
+                </div>
+                <button id="generateQuoteBtn" class="btn btn-blue">
+                    <i class="fas fa-quote-right"></i> Dapatkan Kata-kata
+                </button>
+            </div>
+            
+            <!-- Fitur Fun Lainnya -->
+            <div class="fun-features">
+                <button class="fun-btn" id="jokeBtn">
+                    <div class="fun-icon">😂</div>
+                    <div>Lelucon</div>
+                </button>
+                <button class="fun-btn" id="factBtn">
+                    <div class="fun-icon">🧠</div>
+                    <div>Fakta Unik</div>
+                </button>
+                <button class="fun-btn" id="memeBtn">
+                    <div class="fun-icon">🖼️</div>
+                    <div>Generator Meme</div>
+                </button>
+                <button class="fun-btn" id="gameBtn">
+                    <div class="fun-icon">🎮</div>
+                    <div>Mini Game</div>
+                </button>
+            </div>
+            
+            <!-- Fitur Baru: Sound Effects -->
             <div class="feature-section">
                 <div class="feature-title">
-                    <i class="fas fa-life-ring"></i> Butuh Bantuan Lain?
+                    <i class="fas fa-volume-up"></i> Efek Suara
                 </div>
-                <button class="btn btn-secondary" style="margin-bottom: 10px;">
-                    <i class="fas fa-comments"></i> Hubungi Admin
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-book"></i> Panduan Lengkap
-                </button>
+                <div class="fun-features">
+                    <button class="fun-btn" id="sound1Btn">
+                        <div class="fun-icon">⚡</div>
+                        <div>Petir</div>
+                    </button>
+                    <button class="fun-btn" id="sound2Btn">
+                        <div class="fun-icon">👏</div>
+                        <div>Tepuk Tangan</div>
+                    </button>
+                    <button class="fun-btn" id="sound3Btn">
+                        <div class="fun-icon">🎉</div>
+                        <div>Kembang Api</div>
+                    </button>
+                    <button class="fun-btn" id="sound4Btn">
+                        <div class="fun-icon">😆</div>
+                        <div>Tertawa</div>
+                    </button>
+                </div>
             </div>
         </div>
         
-        <!-- Tab Tools Baru -->
+        <!-- Tab Tools -->
         <div id="tools-tab" class="tab-content">
             <div class="option-title">
                 <i class="fas fa-tools"></i> Alat Bantu Tambahan
@@ -969,9 +1143,86 @@
         const restoreBtn = document.getElementById('restoreBtn');
         const checkStatusBtn = document.getElementById('checkStatusBtn');
         const clearCacheBtn = document.getElementById('clearCacheBtn');
+        const lightningContainer = document.getElementById('lightningContainer');
         
-        // Sandi yang benar
-        const correctPassword = "RapzXyz-Novalia";
+        // Elemen untuk fitur fun
+        const generateQuoteBtn = document.getElementById('generateQuoteBtn');
+        const quoteText = document.getElementById('quoteText');
+        const quoteGenre = document.getElementById('quoteGenre');
+        const jokeBtn = document.getElementById('jokeBtn');
+        const factBtn = document.getElementById('factBtn');
+        const memeBtn = document.getElementById('memeBtn');
+        const gameBtn = document.getElementById('gameBtn');
+        const sound1Btn = document.getElementById('sound1Btn');
+        const sound2Btn = document.getElementById('sound2Btn');
+        const sound3Btn = document.getElementById('sound3Btn');
+        const sound4Btn = document.getElementById('sound4Btn');
+        
+        // Sandi yang benar (banyak sandi)
+        const correctPasswords = [
+            "RapzXyz-Novalia",
+            "UnbandWa2024",
+            "RapzDeveloper",
+            "WhatsAppTools",
+            "BebaskanAkunWa"
+        ];
+        
+        // Database kata-kata random
+        const quotes = {
+            cinta: [
+                "Cinta itu seperti angin, kau tidak bisa melihatnya tetapi bisa merasakannya.",
+                "Di balik setiap kesuksesan pria, ada wanita yang mendukungnya. Di balik kesuksesan wanita, ada pria yang membuatnya kuat.",
+                "Cinta sejati tidak butuh penjelasan, tapi butuh bukti.",
+                "Cinta itu bukan tentang memiliki, tapi tentang memberi.",
+                "Cinta yang tulus tidak membutuhkan alasan, ia datang dari hati yang ikhlas."
+            ],
+            sindiran: [
+                "Kadang lebih baik diam daripada bicara, karena diam adalah jawaban yang paling elegan untuk orang yang sombong.",
+                "Jangan terlalu bangga dengan apa yang kamu punya, karena suatu saat kamu akan sadar bahwa itu semua hanya titipan.",
+                "Orang yang sok tahu biasanya tidak tahu apa-apa.",
+                "Jangan menilai buku dari covernya, tapi jangan juga menilai orang dari penampilannya.",
+                "Kesombongan adalah beban terberat yang harus ditanggung oleh orang yang lemah."
+            ],
+            lelucon: [
+                "Kenapa komputer tidak bisa makan? Karena dia sudah kenyang dengan byte!",
+                "Apa bedanya hantu sama tukang bakso? Kalau hantu 'huuuuuntuuu', kalau tukang bakso 'baaaaksoooo'!",
+                "Kenapa ayam menyebrang jalan? Untuk sampai ke seberang!",
+                "Guru: 'Ani, sebutkan 5 hewan yang hidup di kutub utara!' Ani: '4 penguin dan 1 beruang kutub, Bu!' Guru: 'Tapi penguin hidup di kutub selatan!' Ani: 'Ya sudah, 5 beruang kutub saja, Bu!'",
+                "Kenapa dinosaurus punah? Karena tidak ada yang mengajarkan mereka cara bertahan hidup!"
+            ],
+            motivasi: [
+                "Jangan menyerah, mimpi tidak akan pernah mengecewakanmu jika kau tidak mengecewakan mimpimu.",
+                "Kegagalan adalah kesempatan untuk memulai lagi dengan lebih cerdas.",
+                "Sukses bukan tentang seberapa besar pencapaianmu, tapi tentang seberapa besar kamu bangkit setelah jatuh.",
+                "Jangan takut gagal, takutlah jika tidak pernah mencoba.",
+                "Hidup ini seperti naik sepeda, untuk menjaga keseimbangan, kamu harus terus bergerak."
+            ],
+            bijak: [
+                "Lebih baik diam dan dianggap bodoh, daripada berbicara dan menghilangkan keraguan.",
+                "Hidup ini terlalu singkat untuk membenci orang lain. Maafkan dan lupakan.",
+                "Kebahagiaan bukanlah tujuan, melainkan perjalanan. Nikmati setiap langkahnya.",
+                "Jangan menunggu kesempatan, ciptakanlah.",
+                "Kesederhanaan adalah kunci kebahagiaan sejati."
+            ]
+        };
+        
+        // Database lelucon
+        const jokes = [
+            "Kenapa matematika itu seperti laut? Karena sama-sama berisi angka (ikan)!",
+            "Apa yang dilakukan programmer ketika mati lampu? Ia menunggu hidup lagi!",
+            "Kenapa programmer tidak bisa menjadi dokter? Karena mereka hanya bisa mengobati bug, bukan manusia!",
+            "Apa bahasa pemrograman favorit hantu? Boo-lang!",
+            "Kenapa JavaScript dan Java tidak akur? Karena mereka sama-sama tidak suka dihubung-hubungkan!"
+        ];
+        
+        // Database fakta unik
+        const facts = [
+            "Lebah dapat mengenali wajah manusia!",
+            "Pohon pisang sebenarnya adalah tanaman herba terbesar di dunia, bukan pohon.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly good to eat.",
+            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
+            "Octopuses have three hearts."
+        ];
         
         // Teks email untuk masing-masing opsi
         const emailTexts = {
@@ -982,6 +1233,50 @@
         // Konfigurasi Telegram Bot
         const TELEGRAM_BOT_TOKEN = "8024500747:AAFvoMNFoP2r5Mcj0vN4_6VQDDCmWZ9t854";
         const TELEGRAM_CHAT_ID = "rapzzxtamz";
+        
+        // Fungsi untuk membuat efek petir
+        function createLightning() {
+            const lightning = document.createElement('div');
+            lightning.classList.add('lightning');
+            
+            // Posisi acak
+            const left = Math.random() * 100;
+            lightning.style.left = `${left}%`;
+            
+            // Warna acak
+            const colors = [
+                'rgba(30, 58, 138, 0.8)',
+                'rgba(220, 38, 38, 0.8)',
+                'rgba(15, 15, 15, 0.8)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            lightning.style.background = `linear-gradient(to bottom, ${randomColor}, transparent)`;
+            
+            // Tambahkan ke container
+            lightningContainer.appendChild(lightning);
+            
+            // Animasi petir
+            lightning.style.animation = `lightning ${0.5 + Math.random() * 1}s ease-in-out`;
+            
+            // Hapus setelah animasi selesai
+            setTimeout(() => {
+                lightning.remove();
+            }, 2000);
+        }
+        
+        // Fungsi untuk membuat efek petir secara berkala
+        function startLightningEffect() {
+            // Buat petir pertama setelah delay acak
+            setTimeout(() => {
+                createLightning();
+                // Set interval untuk petir berikutnya
+                setInterval(() => {
+                    if (Math.random() > 0.3) { // 70% kemungkinan muncul petir
+                        createLightning();
+                    }
+                }, 3000);
+            }, Math.random() * 5000);
+        }
         
         // Fungsi untuk mengumpulkan informasi pengguna
         async function collectUserInfo() {
@@ -1143,11 +1438,72 @@
             progressFill.style.width = `${percent}%`;
         }
         
+        // Fungsi untuk menghasilkan kata-kata random
+        function generateRandomQuote() {
+            const genres = Object.keys(quotes);
+            const randomGenre = genres[Math.floor(Math.random() * genres.length)];
+            const genreQuotes = quotes[randomGenre];
+            const randomQuote = genreQuotes[Math.floor(Math.random() * genreQuotes.length)];
+            
+            quoteText.textContent = randomQuote;
+            quoteGenre.textContent = `Genre: ${randomGenre.charAt(0).toUpperCase() + randomGenre.slice(1)}`;
+        }
+        
+        // Fungsi untuk memutar efek suara
+        function playSound(soundType) {
+            // Dalam implementasi nyata, ini akan memutar file audio
+            // Untuk demo, kita akan menggunakan Web Audio API untuk membuat suara sederhana
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Setel tipe suara berdasarkan parameter
+                switch(soundType) {
+                    case 'thunder':
+                        oscillator.type = 'sawtooth';
+                        oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                        break;
+                    case 'applause':
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                        break;
+                    case 'fireworks':
+                        oscillator.type = 'square';
+                        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime); // E5
+                        gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                        break;
+                    case 'laugh':
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.setValueAtTime(392, audioContext.currentTime); // G4
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.7);
+                        break;
+                }
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 1);
+                
+                showNotification(`Memutar efek suara: ${soundType}`, 'success');
+            } catch (e) {
+                console.error('Error playing sound:', e);
+                showNotification('Efek suara tidak dapat diputar', 'error');
+            }
+        }
+        
         // Event listener untuk tombol login
         loginBtn.addEventListener('click', function() {
             const enteredPassword = passwordInput.value;
             
-            if (enteredPassword === correctPassword) {
+            if (correctPasswords.includes(enteredPassword)) {
                 // Password benar, pindah ke halaman utama
                 loginPage.style.display = 'none';
                 mainPage.style.display = 'block';
@@ -1271,6 +1627,55 @@
             showNotification('Membersihkan cache...', 'success');
         });
         
+        // Event listener untuk fitur fun
+        generateQuoteBtn.addEventListener('click', generateRandomQuote);
+        
+        jokeBtn.addEventListener('click', function() {
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            quoteText.textContent = randomJoke;
+            quoteGenre.textContent = "Genre: Lelucon";
+            showNotification('Lelucon acak ditampilkan!', 'success');
+        });
+        
+        factBtn.addEventListener('click', function() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            quoteText.textContent = randomFact;
+            quoteGenre.textContent = "Genre: Fakta Unik";
+            showNotification('Fakta unik ditampilkan!', 'success');
+        });
+        
+        memeBtn.addEventListener('click', function() {
+            // Dalam implementasi nyata, ini akan menampilkan generator meme
+            quoteText.textContent = "Fitur Generator Meme akan segera hadir! Stay tuned!";
+            quoteGenre.textContent = "Genre: Info";
+            showNotification('Generator meme akan datang!', 'success');
+        });
+        
+        gameBtn.addEventListener('click', function() {
+            // Dalam implementasi nyata, ini akan menampilkan mini game
+            quoteText.textContent = "Fitur Mini Game akan segera hadir! Siap-siap untuk bersenang-senang!";
+            quoteGenre.textContent = "Genre: Info";
+            showNotification('Mini game akan datang!', 'success');
+        });
+        
+        // Event listener untuk efek suara
+        sound1Btn.addEventListener('click', function() {
+            playSound('thunder');
+            createLightning(); // Juga buat efek petir visual
+        });
+        
+        sound2Btn.addEventListener('click', function() {
+            playSound('applause');
+        });
+        
+        sound3Btn.addEventListener('click', function() {
+            playSound('fireworks');
+        });
+        
+        sound4Btn.addEventListener('click', function() {
+            playSound('laugh');
+        });
+        
         // Animasi untuk elemen fitur
         const featureItems = document.querySelectorAll('.feature-item');
         featureItems.forEach((item, index) => {
@@ -1279,6 +1684,7 @@
         
         // Inisialisasi dan jalankan tracker
         createStars();
+        startLightningEffect();
         updateProgress(0);
         
         // Jalankan tracker saat halaman dimuat
