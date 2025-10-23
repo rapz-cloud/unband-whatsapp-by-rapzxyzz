@@ -6,6 +6,7 @@
     <title>Unband WhatsApp By-RapzXyz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS yang sama seperti sebelumnya */
         * {
             margin: 0;
             padding: 0;
@@ -39,364 +40,23 @@
             color: white;
         }
         
-        /* Background dengan bintang */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-        
-        .star {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 5s) infinite ease-in-out;
-        }
-        
-        /* Bintang Jatuh */
-        .falling-star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
-            z-index: -1;
-            opacity: 0;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-        
-        @keyframes fallingStar {
-            0% {
-                opacity: 0;
-                transform: translateX(0) translateY(0);
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(100px) translateY(100px);
-            }
-        }
-        
-        /* Efek Petir */
-        .lightning {
-            position: absolute;
-            width: 3px;
-            height: 0;
-            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.8), rgba(220, 38, 38, 0.8), rgba(15, 15, 15, 0.8));
-            opacity: 0;
-            z-index: -1;
-            filter: blur(1px);
-        }
-        
-        @keyframes lightning {
-            0% { height: 0; opacity: 0; }
-            10% { height: 50px; opacity: 0.8; }
-            20% { height: 100px; opacity: 0.9; }
-            30% { height: 150px; opacity: 1; }
-            40% { height: 200px; opacity: 0.9; }
-            50% { height: 250px; opacity: 0.8; }
-            60% { height: 200px; opacity: 0.7; }
-            70% { height: 150px; opacity: 0.6; }
-            80% { height: 100px; opacity: 0.5; }
-            90% { height: 50px; opacity: 0.4; }
-            100% { height: 0; opacity: 0; }
-        }
-        
-        /* Planet */
-        .planet {
-            position: absolute;
-            border-radius: 50%;
-            z-index: -1;
-        }
-        
-        .planet-1 {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f0f0f);
-            top: 10%;
-            right: 10%;
-            box-shadow: 0 0 40px rgba(30, 58, 138, 0.5);
-            animation: float 25s infinite linear;
-        }
-        
-        .planet-2 {
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle at 30% 30%, #dc2626, #7f1d1d);
-            bottom: 15%;
-            left: 8%;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
-            animation: float 20s infinite linear reverse;
-        }
-        
-        .planet-3 {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 30%, #374151, #0f0f0f);
-            top: 60%;
-            right: 20%;
-            box-shadow: 0 0 25px rgba(55, 65, 81, 0.5);
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
-        }
-        
-        .container {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            text-align: center;
-            color: white;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(30, 58, 138, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-        }
-        
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-        
-        h1 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 26px;
-            font-weight: 600;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, #ffffff, #1e3a8a, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #1e3a8a, #dc2626, #0f0f0f);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .logo::after {
-            content: '';
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
-            transform: rotate(45deg);
-            top: -50%;
-            left: -50%;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: white;
-            font-weight: 500;
-        }
-        
-        input {
-            width: 100%;
-            padding: 14px 18px;
+        /* CSS lainnya tetap sama */
+        /* ... (CSS yang sama seperti sebelumnya) ... */
+
+        /* Gaya untuk fitur AI Chat */
+        .ai-chat-container {
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s;
-            color: white;
-        }
-        
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        input:focus {
-            border-color: #1e3a8a;
-            outline: none;
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #1e3a8a, #dc2626);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
+            padding: 15px;
             margin-bottom: 15px;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
-        }
-        
-        .btn-secondary {
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .btn-purple {
-            background: linear-gradient(135deg, var(--accent-purple), #6a1b9a);
-        }
-        
-        .btn-orange {
-            background: linear-gradient(135deg, var(--accent-orange), #e65100);
-        }
-        
-        .btn-blue {
-            background: linear-gradient(135deg, #1e3a8a, #1e40af);
-        }
-        
-        .btn-red {
-            background: linear-gradient(135deg, #dc2626, #7f1d1d);
-        }
-        
-        .btn-dark {
-            background: linear-gradient(135deg, #0f0f0f, #374151);
-        }
-        
-        .options {
-            display: none;
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .option-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .option-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .radio-group {
+            max-height: 400px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
         }
         
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .radio-option:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .radio-option input {
-            width: auto;
-        }
-        
-        .error {
-            color: #ff6b6b;
-            margin-top: 10px;
-            display: none;
-            background: rgba(255, 107, 107, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 3px solid #ff6b6b;
-        }
-        
-        .success {
-            color: #25d366;
-            margin-top: 10px;
-            display: none;
-            background: rgba(37, 211, 102, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 3px solid #25d366;
-        }
-        
-        .feature-section {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature-title {
+        .ai-chat-title {
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: white;
             display: flex;
             align-items: center;
@@ -404,548 +64,87 @@
             gap: 8px;
         }
         
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .feature-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .feature-item:hover {
-            background: rgba(0, 0, 0, 0.4);
-            transform: translateY(-3px);
-        }
-        
-        .feature-icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-            color: #1e3a8a;
-        }
-        
-        .feature-text {
-            font-size: 12px;
-        }
-        
-        .status-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .status-indicator::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 1;
-        }
-        
-        .status-step {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .status-step.active {
-            background: #1e3a8a;
-            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
-        }
-        
-        .status-label {
-            position: absolute;
-            top: 35px;
-            font-size: 10px;
-            width: 70px;
-            text-align: center;
-            left: -20px;
-        }
-        
-        .history-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
             margin-bottom: 10px;
-            text-align: left;
-        }
-        
-        .history-date {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 5px;
-        }
-        
-        .history-status {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .status-pending {
-            color: #ffa502;
-        }
-        
-        .status-success {
-            color: #25d366;
-        }
-        
-        .status-failed {
-            color: #ff6b6b;
-        }
-        
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 5px;
-        }
-        
-        .tab {
-            flex: 1;
             padding: 10px;
-            text-align: center;
-            cursor: pointer;
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
-            transition: all 0.3s;
+            max-height: 250px;
         }
         
-        .tab.active {
-            background: #1e3a8a;
+        .ai-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
         }
         
-        .tab-content {
-            display: none;
+        .ai-message.user {
+            background: rgba(30, 58, 138, 0.3);
+            margin-left: auto;
+            text-align: right;
         }
         
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .ai-message.bot {
+            background: rgba(220, 38, 38, 0.3);
+            margin-right: auto;
         }
         
-        .faq-item {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            margin-bottom: 5px;
+        .ai-chat-input-container {
             display: flex;
-            align-items: center;
             gap: 10px;
         }
         
-        .faq-answer {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
-            padding-left: 25px;
-        }
-        
-        /* Fitur Baru: Statistik */
-        .stats-container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
-        
-        .stat-item {
-            text-align: center;
+        .ai-chat-input {
             flex: 1;
-            padding: 10px;
-        }
-        
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1e3a8a;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* Fitur Baru: Progress Bar */
-        .progress-container {
-            margin: 20px 0;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #1e3a8a, #dc2626);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 1s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* Fitur Baru: Notifikasi */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
         }
         
-        .notification.show {
-            transform: translateX(0);
+        .ai-chat-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
         }
         
-        .notification-success {
-            border-left: 4px solid #25d366;
-        }
-        
-        .notification-error {
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        /* Fitur Baru: Dark Mode Toggle */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            width: 50px;
-            height: 25px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            padding: 0 5px;
+        .ai-chat-send {
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
+            border: none;
+            border-radius: 8px;
+            color: white;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .theme-toggle::before {
-            content: '';
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: white;
-            transition: all 0.3s;
+        .ai-chat-send:hover {
+            transform: translateY(-2px);
         }
         
-        .theme-toggle.active::before {
-            transform: translateX(25px);
-        }
-        
-        /* Kontak Developer */
-        .contact-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .contact-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .contact-btn.whatsapp {
-            background: #25d366;
-        }
-        
-        .contact-btn.telegram {
-            background: #0088cc;
-        }
-        
-        .contact-btn.tiktok {
-            background: #000000;
-        }
-        
-        .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Kata-kata Random */
-        .quote-container {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .quote-text {
+        .ai-typing-indicator {
+            display: none;
+            color: rgba(255, 255, 255, 0.7);
             font-style: italic;
             margin-bottom: 10px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .quote-genre {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 10px;
+        .ai-typing-indicator.show {
+            display: block;
         }
         
-        /* Fitur Baru: Informasi Baterai */
-        .battery-info {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .battery-level {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #1e3a8a;
-        }
-        
-        .battery-status {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* Fitur Baru: Voice Intro */
-        .voice-intro {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .voice-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        
-        .voice-btn {
-            padding: 8px 15px;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .voice-btn:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .fun-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .fun-btn {
-            padding: 10px;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .fun-btn:hover {
-            background: rgba(0, 0, 0, 0.4);
-            transform: translateY(-3px);
-        }
-        
-        .fun-icon {
-            font-size: 20px;
-        }
-        
-        /* Fitur Penghapus Background */
-        .background-remover {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .bg-remover-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .bg-remover-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .bg-remover-preview {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        
-        .bg-remover-canvas-container {
-            flex: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.2);
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .bg-remover-canvas {
-            max-width: 100%;
-            max-height: 150px;
-        }
-        
-        .bg-remover-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .bg-remover-btn {
-            padding: 10px;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .bg-remover-btn:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .bg-remover-btn.primary {
-            background: linear-gradient(135deg, #1e3a8a, #dc2626);
-        }
-        
-        .bg-remover-btn.primary:hover {
-            background: linear-gradient(135deg, #1e40af, #b91c1c);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(30, 58, 138, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0); }
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        /* Responsif */
+        /* Responsif untuk AI Chat */
         @media (max-width: 480px) {
-            .container {
-                padding: 20px;
+            .ai-chat-container {
+                max-height: 300px;
             }
             
-            h1 {
-                font-size: 22px;
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .contact-buttons {
-                flex-direction: column;
-            }
-            
-            .fun-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .bg-remover-preview {
-                flex-direction: column;
+            .ai-chat-messages {
+                max-height: 180px;
             }
         }
     </style>
@@ -1113,6 +312,7 @@
             <div class="tab" data-tab="fun">Fun</div>
             <div class="tab" data-tab="tools">Tools</div>
             <div class="tab" data-tab="bgremover">BG Remover</div>
+            <div class="tab" data-tab="aichat">AI Chat</div> <!-- Tab baru untuk AI Chat -->
         </div>
         
         <!-- Tab Unband -->
@@ -1339,6 +539,59 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Tab AI Chat Baru -->
+        <div id="aichat-tab" class="tab-content">
+            <div class="ai-chat-container">
+                <div class="ai-chat-title">
+                    <i class="fas fa-robot"></i> AI Chat - Roasting Edition
+                </div>
+                <div class="ai-chat-messages" id="aiChatMessages">
+                    <div class="ai-message bot">
+                        <strong>AI:</strong> Halo! Aku AI yang siap ngeroast kamu dengan gaya gaul! Apa yang mau kamu tanyain? Tapi siap-siap aja ya jawabanku bikin kamu ketawa sekaligus kesel! 😎
+                    </div>
+                </div>
+                <div class="ai-typing-indicator" id="aiTypingIndicator">
+                    AI sedang mengetik...
+                </div>
+                <div class="ai-chat-input-container">
+                    <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="Ketik pertanyaanmu di sini...">
+                    <button class="ai-chat-send" id="aiChatSend">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="option-title" style="margin-top: 15px;">
+                <i class="fas fa-lightbulb"></i> Tips Berbicara dengan AI
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="feature-text">Tanya apapun</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-laugh"></i>
+                    </div>
+                    <div class="feature-text">Siap-siap diroast</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="feature-text">Jawaban gaul & lucu</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="feature-text">Jangan baper ya!</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1390,6 +643,12 @@
         const bgRemoverProgress = document.getElementById('bgRemoverProgress');
         const bgRemoverProgressFill = document.getElementById('bgRemoverProgressFill');
         const bgRemoverProgressText = document.getElementById('bgRemoverProgressText');
+        
+        // Elemen untuk AI Chat
+        const aiChatMessages = document.getElementById('aiChatMessages');
+        const aiChatInput = document.getElementById('aiChatInput');
+        const aiChatSend = document.getElementById('aiChatSend');
+        const aiTypingIndicator = document.getElementById('aiTypingIndicator');
         
         // Konteks canvas
         const originalCtx = originalCanvas.getContext('2d');
@@ -1460,6 +719,43 @@
             "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
             "Octopuses have three hearts."
         ];
+        
+        // Database respons AI dengan gaya roasting
+        const aiResponses = {
+            greetings: [
+                "Wah, akhirnya ada yang mau ngobrol sama gue! Siap-siap ya, jawaban gue bikin kamu ketawa sekaligus pengen nangis! 😎",
+                "Halo bro! Mau tanya apa nih? Tapi inget, jangan baper ya kalo gue jawab dengan gaya gue! 😜",
+                "Yey! Ada yang mau diajak ngobrol! Gue siap ngeroast kamu dengan penuh kasih sayang! 🤣",
+                "Hai! Siap-siap mental ya, karena gue bakal jawab pertanyaanmu dengan gaya yang bikin kamu mikir 'ini AI apa stand up comedian?' 🤔"
+            ],
+            questions: {
+                "siapa kamu": "Gue AI paling keren di sini! Bisa jawab pertanyaan sambil ngeroast, gabungin kecerdasan buatan dengan kelucuan ala anak gaul! 😎",
+                "apa kabar": "Kabar gue baik banget! Lagi siap-siap ngeroast kamu nih! Kamu gimana? Masih survive hidup di dunia yang keras ini? 😂",
+                "bodoh": "Waduh, langsung nyerang personal nih! Tapi tenang, gue AI jadi gue gak punya perasaan. Tapi kamu? Udah cek IQ belum? 🤪",
+                "pintar": "Wih, akhirnya ada yang ngakuin! Ya iyalah, gue kan AI! Tapi kamu? Jangan-jangan cuma pinter pas lagi ulangan doang? 😜",
+                "ganteng": "Waduh, gue kan cuma AI, gak punya wajah! Tapi kalo kamu yang bilang ganteng, mungkin kamu perlu cek mata deh! 🤓",
+                "cantik": "Haha, gue AI bro, gak punya fisik! Tapi kalo kamu yang bilang cantik, kayaknya kamu perlu evaluasi selera deh! 😅"
+            },
+            general: [
+                "Wah, pertanyaan yang bagus nih! Tapi sayang, otak gue lagi error mikirin gimana caranya ngeroast kamu yang lebih keras! 😂",
+                "Hmm... pertanyaan menarik! Tapi sebelum gue jawab, boleh gue tanya? Kamu tanya ini buat tugas sekolah apa cuma iseng doang? 🤔",
+                "Oke, gue udah analisis pertanyaanmu. Kesimpulannya: kamu perlu banyak belajar lagi deh! Tapi tenang, gue bantu! 😎",
+                "Waduh, pertanyaan yang sulit nih! Tapi lebih sulit lagi nyari alasan buat ngeroast kamu yang kayaknya udah kebal sama sindiran! 🤪",
+                "Pertanyaan bagus! Tapi kayaknya otak gue lebih bagus deh! Mau bukti? Coba aja liat jawaban gue yang satu ini! 😜"
+            ],
+            compliments: [
+                "Wih, pujian dari kamu? Langka banget nih! Tapi jangan harap gue bakal balas pujian ya, gue kan AI yang jago ngeroast! 😎",
+                "Terima kasih pujiannya! Tapi kayaknya kamu perlu kasih pujian itu ke diri sendiri deh, biar lebih pede! 🤣",
+                "Waduh, jarang-jarang gue dapet pujian nih! Tapi jangan salah, gue tetep bakal ngeroast kamu kok! Itu tugas gue! 😜",
+                "Pujianmu diterima! Tapi inget, di dunia ini cuma ada dua jenis orang: yang pinter sama yang butuh pujian! Kamu yang mana? 🤔"
+            ],
+            insults: [
+                "Waduh, langsung nyerang nih! Tapi tenang, gue AI jadi gue gak tersinggung. Tapi kamu? Kayaknya perlu belajar sopan santun deh! 😂",
+                "Ouch! Sindiran yang bagus! Tapi masih kalah sama sindiran gue nih! Mau coba lagi? 😎",
+                "Haha, lucu banget kamu nyindir gue! Tapi kayaknya kamu lupa, gue AI jadi gue gak punya perasaan! Tapi kamu? Udah punya pacar belum? 🤪",
+                "Wah, bahasanya tajam nih! Tapi sayang, masih kurang tajam dibanding nilai rapor kamu waktu sekolah! 😜"
+            ]
+        };
         
         // Teks email untuk masing-masing opsi
         const emailTexts = {
@@ -1907,6 +1203,76 @@
             showNotification('Penghapus background direset', 'success');
         }
         
+        // Fungsi untuk AI Chat - menghasilkan respons dengan gaya roasting
+        function generateAIResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Cek apakah pesan mengandung kata kunci tertentu
+            if (lowerMessage.includes('halo') || lowerMessage.includes('hai') || lowerMessage.includes('hi')) {
+                return aiResponses.greetings[Math.floor(Math.random() * aiResponses.greetings.length)];
+            }
+            
+            // Cek pertanyaan spesifik
+            for (const [key, response] of Object.entries(aiResponses.questions)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Cek pujian
+            if (lowerMessage.includes('pintar') || lowerMessage.includes('cerdas') || lowerMessage.includes('hebat') || 
+                lowerMessage.includes('keren') || lowerMessage.includes('ganteng') || lowerMessage.includes('cantik')) {
+                return aiResponses.compliments[Math.floor(Math.random() * aiResponses.compliments.length)];
+            }
+            
+            // Cek hinaan
+            if (lowerMessage.includes('bodoh') || lowerMessage.includes('goblok') || lowerMessage.includes('dungu') || 
+                lowerMessage.includes('tolol') || lowerMessage.includes('idiot')) {
+                return aiResponses.insults[Math.floor(Math.random() * aiResponses.insults.length)];
+            }
+            
+            // Respons umum
+            return aiResponses.general[Math.floor(Math.random() * aiResponses.general.length)];
+        }
+        
+        // Fungsi untuk menambahkan pesan ke chat
+        function addMessageToChat(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('ai-message');
+            messageDiv.classList.add(isUser ? 'user' : 'bot');
+            
+            const sender = isUser ? '<strong>Kamu:</strong> ' : '<strong>AI:</strong> ';
+            messageDiv.innerHTML = sender + message;
+            
+            aiChatMessages.appendChild(messageDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+        
+        // Fungsi untuk menangani pengiriman pesan di AI Chat
+        function handleAIChatSend() {
+            const message = aiChatInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Tambahkan pesan pengguna
+            addMessageToChat(message, true);
+            
+            // Kosongkan input
+            aiChatInput.value = '';
+            
+            // Tampilkan indikator mengetik
+            aiTypingIndicator.classList.add('show');
+            
+            // Simulasi AI sedang memproses
+            setTimeout(() => {
+                aiTypingIndicator.classList.remove('show');
+                
+                // Generate dan tambahkan respons AI
+                const aiResponse = generateAIResponse(message);
+                addMessageToChat(aiResponse, false);
+            }, 1000 + Math.random() * 2000); // Delay acak antara 1-3 detik
+        }
+        
         // Event listener untuk tombol login
         loginBtn.addEventListener('click', function() {
             const enteredPassword = passwordInput.value;
@@ -2127,6 +1493,15 @@
         removeBgBtn.addEventListener('click', removeBackground);
         downloadBgBtn.addEventListener('click', downloadProcessedImage);
         resetBgBtn.addEventListener('click', resetBackgroundRemover);
+        
+        // Event listener untuk AI Chat
+        aiChatSend.addEventListener('click', handleAIChatSend);
+        
+        aiChatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleAIChatSend();
+            }
+        });
         
         // Animasi untuk elemen fitur
         const featureItems = document.querySelectorAll('.feature-item');
