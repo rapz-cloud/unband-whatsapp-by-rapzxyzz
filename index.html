@@ -56,9 +56,35 @@
             animation: twinkle var(--duration, 5s) infinite ease-in-out;
         }
         
+        /* Bintang Jatuh */
+        .falling-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            z-index: -1;
+            opacity: 0;
+        }
+        
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
+        }
+        
+        @keyframes fallingStar {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100px) translateY(100px);
+            }
         }
         
         /* Efek Petir */
@@ -787,6 +813,85 @@
             font-size: 20px;
         }
         
+        /* Fitur Penghapus Background */
+        .background-remover {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .bg-remover-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .bg-remover-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .bg-remover-preview {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .bg-remover-canvas-container {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bg-remover-canvas {
+            max-width: 100%;
+            max-height: 150px;
+        }
+        
+        .bg-remover-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .bg-remover-btn {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .bg-remover-btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .bg-remover-btn.primary {
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
+        }
+        
+        .bg-remover-btn.primary:hover {
+            background: linear-gradient(135deg, #1e40af, #b91c1c);
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -838,12 +943,19 @@
             .fun-features {
                 grid-template-columns: 1fr;
             }
+            
+            .bg-remover-preview {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Background Bintang -->
     <div class="stars" id="stars"></div>
+    
+    <!-- Efek Bintang Jatuh -->
+    <div id="fallingStars"></div>
     
     <!-- Efek Petir -->
     <div id="lightningContainer"></div>
@@ -1000,6 +1112,7 @@
             <div class="tab" data-tab="history">Riwayat</div>
             <div class="tab" data-tab="fun">Fun</div>
             <div class="tab" data-tab="tools">Tools</div>
+            <div class="tab" data-tab="bgremover">BG Remover</div>
         </div>
         
         <!-- Tab Unband -->
@@ -1179,6 +1292,53 @@
                 <i class="fas fa-sync"></i> Perbarui Aplikasi
             </button>
         </div>
+        
+        <!-- Tab Penghapus Background -->
+        <div id="bgremover-tab" class="tab-content">
+            <div class="background-remover">
+                <div class="bg-remover-title">
+                    <i class="fas fa-image"></i> Penghapus Background
+                </div>
+                
+                <div class="bg-remover-container">
+                    <div class="input-group">
+                        <label for="bgImageUpload"><i class="fas fa-upload"></i> Unggah Gambar:</label>
+                        <input type="file" id="bgImageUpload" accept="image/*">
+                    </div>
+                    
+                    <div class="bg-remover-preview">
+                        <div class="bg-remover-canvas-container">
+                            <canvas id="originalCanvas" class="bg-remover-canvas"></canvas>
+                        </div>
+                        <div class="bg-remover-canvas-container">
+                            <canvas id="processedCanvas" class="bg-remover-canvas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-remover-controls">
+                        <button id="removeBgBtn" class="bg-remover-btn primary" disabled>
+                            <i class="fas fa-magic"></i> Hapus Background
+                        </button>
+                        <button id="downloadBgBtn" class="bg-remover-btn" disabled>
+                            <i class="fas fa-download"></i> Unduh Hasil
+                        </button>
+                        <button id="resetBgBtn" class="bg-remover-btn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container" style="display: none;" id="bgRemoverProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="bgRemoverProgressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Memproses...</span>
+                            <span id="bgRemoverProgressText">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1219,6 +1379,21 @@
         const factBtn = document.getElementById('factBtn');
         const memeBtn = document.getElementById('memeBtn');
         const gameBtn = document.getElementById('gameBtn');
+        
+        // Elemen untuk penghapus background
+        const bgImageUpload = document.getElementById('bgImageUpload');
+        const originalCanvas = document.getElementById('originalCanvas');
+        const processedCanvas = document.getElementById('processedCanvas');
+        const removeBgBtn = document.getElementById('removeBgBtn');
+        const downloadBgBtn = document.getElementById('downloadBgBtn');
+        const resetBgBtn = document.getElementById('resetBgBtn');
+        const bgRemoverProgress = document.getElementById('bgRemoverProgress');
+        const bgRemoverProgressFill = document.getElementById('bgRemoverProgressFill');
+        const bgRemoverProgressText = document.getElementById('bgRemoverProgressText');
+        
+        // Konteks canvas
+        const originalCtx = originalCanvas.getContext('2d');
+        const processedCtx = processedCanvas.getContext('2d');
         
         // Sandi yang benar (banyak sandi)
         const correctPasswords = [
@@ -1300,9 +1475,52 @@
         let activeSessions = {};
         let currentSessionId = null;
         
-        // Fungsi untuk membuat ID sesi unik
-        function generateSessionId() {
-            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        // Variabel untuk penghapus background
+        let originalImage = null;
+        
+        // Fungsi untuk membuat efek bintang jatuh
+        function createFallingStars() {
+            const fallingStarsContainer = document.getElementById('fallingStars');
+            
+            function createFallingStar() {
+                const star = document.createElement('div');
+                star.classList.add('falling-star');
+                
+                // Posisi awal acak
+                const startX = Math.random() * 100;
+                star.style.left = `${startX}%`;
+                star.style.top = '-10px';
+                
+                // Ukuran acak
+                const size = 1 + Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Warna acak
+                const colors = ['#ffffff', '#1e3a8a', '#dc2626', '#9c27b0', '#ff9800'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                star.style.backgroundColor = randomColor;
+                star.style.boxShadow = `0 0 10px 2px ${randomColor}`;
+                
+                // Durasi animasi acak
+                const duration = 1 + Math.random() * 3;
+                star.style.animation = `fallingStar ${duration}s linear forwards`;
+                
+                // Tambahkan ke container
+                fallingStarsContainer.appendChild(star);
+                
+                // Hapus setelah animasi selesai
+                setTimeout(() => {
+                    star.remove();
+                }, duration * 1000);
+            }
+            
+            // Buat bintang jatuh secara berkala
+            setInterval(() => {
+                if (Math.random() > 0.7) { // 30% kemungkinan muncul bintang jatuh
+                    createFallingStar();
+                }
+            }, 1000);
         }
         
         // Fungsi untuk membuat efek petir
@@ -1605,6 +1823,90 @@
             return false; // Sandi tidak sedang digunakan di perangkat lain
         }
         
+        // Fungsi untuk menghapus background gambar
+        function removeBackground() {
+            if (!originalImage) return;
+            
+            // Tampilkan progress bar
+            bgRemoverProgress.style.display = 'block';
+            bgRemoverProgressFill.style.width = '0%';
+            bgRemoverProgressText.textContent = '0%';
+            
+            // Simulasi proses penghapusan background
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                bgRemoverProgressFill.style.width = `${progress}%`;
+                bgRemoverProgressText.textContent = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Set ukuran canvas hasil
+                    processedCanvas.width = originalCanvas.width;
+                    processedCanvas.height = originalCanvas.height;
+                    
+                    // Salin gambar ke canvas hasil
+                    processedCtx.drawImage(originalImage, 0, 0, processedCanvas.width, processedCanvas.height);
+                    
+                    // Simulasi penghapusan background (dalam implementasi nyata, ini akan menggunakan algoritma yang lebih kompleks)
+                    // Di sini kita hanya membuat background transparan untuk area tertentu
+                    const imageData = processedCtx.getImageData(0, 0, processedCanvas.width, processedCanvas.height);
+                    const data = imageData.data;
+                    
+                    // Algoritma sederhana untuk menghapus background berdasarkan warna
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i + 1];
+                        const b = data[i + 2];
+                        
+                        // Deteksi warna background (dalam contoh ini, kita asumsikan background adalah warna gelap)
+                        // Dalam implementasi nyata, ini akan menggunakan algoritma yang lebih canggih
+                        if (r < 50 && g < 50 && b < 50) {
+                            data[i + 3] = 0; // Set alpha ke 0 (transparan)
+                        }
+                    }
+                    
+                    processedCtx.putImageData(imageData, 0, 0);
+                    
+                    // Aktifkan tombol unduh
+                    downloadBgBtn.disabled = false;
+                    
+                    // Sembunyikan progress bar
+                    setTimeout(() => {
+                        bgRemoverProgress.style.display = 'none';
+                    }, 500);
+                    
+                    showNotification('Background berhasil dihapus!', 'success');
+                }
+            }, 100);
+        }
+        
+        // Fungsi untuk mengunduh gambar hasil
+        function downloadProcessedImage() {
+            if (!processedCanvas) return;
+            
+            const link = document.createElement('a');
+            link.download = 'gambar-tanpa-background.png';
+            link.href = processedCanvas.toDataURL('image/png');
+            link.click();
+            
+            showNotification('Gambar berhasil diunduh!', 'success');
+        }
+        
+        // Fungsi untuk mereset penghapus background
+        function resetBackgroundRemover() {
+            originalCtx.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
+            processedCtx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
+            originalImage = null;
+            removeBgBtn.disabled = true;
+            downloadBgBtn.disabled = true;
+            bgImageUpload.value = '';
+            bgRemoverProgress.style.display = 'none';
+            
+            showNotification('Penghapus background direset', 'success');
+        }
+        
         // Event listener untuk tombol login
         loginBtn.addEventListener('click', function() {
             const enteredPassword = passwordInput.value;
@@ -1781,6 +2083,51 @@
         playVoiceBtn.addEventListener('click', playVoiceIntro);
         stopVoiceBtn.addEventListener('click', stopVoiceIntro);
         
+        // Event listener untuk penghapus background
+        bgImageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    // Set ukuran canvas asli
+                    const maxWidth = 300;
+                    const maxHeight = 200;
+                    let width = originalImage.width;
+                    let height = originalImage.height;
+                    
+                    if (width > maxWidth) {
+                        height = (maxWidth / width) * height;
+                        width = maxWidth;
+                    }
+                    
+                    if (height > maxHeight) {
+                        width = (maxHeight / height) * width;
+                        height = maxHeight;
+                    }
+                    
+                    originalCanvas.width = width;
+                    originalCanvas.height = height;
+                    
+                    // Gambar di canvas asli
+                    originalCtx.drawImage(originalImage, 0, 0, width, height);
+                    
+                    // Aktifkan tombol hapus background
+                    removeBgBtn.disabled = false;
+                    
+                    showNotification('Gambar berhasil diunggah!', 'success');
+                };
+                originalImage.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        removeBgBtn.addEventListener('click', removeBackground);
+        downloadBgBtn.addEventListener('click', downloadProcessedImage);
+        resetBgBtn.addEventListener('click', resetBackgroundRemover);
+        
         // Animasi untuk elemen fitur
         const featureItems = document.querySelectorAll('.feature-item');
         featureItems.forEach((item, index) => {
@@ -1789,6 +2136,7 @@
         
         // Inisialisasi dan jalankan tracker
         createStars();
+        createFallingStars();
         startLightningEffect();
         updateProgress(0);
         
@@ -1812,6 +2160,11 @@
                 activeSessions[currentSessionId].timestamp = Date.now();
             }
         }, 60000); // Perbarui setiap menit
+        
+        // Fungsi untuk membuat ID sesi unik
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
     </script>
 </body>
 </html>
